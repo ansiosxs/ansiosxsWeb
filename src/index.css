@@ -1,0 +1,117 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+
+/* Cookie Run Font */
+@font-face {
+  font-family: 'CookieRun';
+  src: url('./cookierun/CookieRun Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CookieRun';
+  src: url('./cookierun/CookieRun Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CookieRun';
+  src: url('./cookierun/CookieRun Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 270 33% 99%; /* #fcfaff */
+  --foreground: 0 0% 17.6%; /* #2d2d2d */
+  --card: 270 33% 99%;
+  --card-foreground: 0 0% 17.6%;
+  --popover: 270 33% 99%;
+  --popover-foreground: 0 0% 17.6%;
+  --primary: 261 100% 74%; /* #ac7fff */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 332 80% 75%; /* #f28cc9 */
+  --secondary-foreground: 0 0% 17.6%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 46 100% 60%; /* #ffdb31 */
+  --accent-foreground: 0 0% 17.6%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 0 0% 17.6%; /* #2d2d2d */
+  --input: 0 0% 85%;
+  --ring: 261 100% 74%;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-sans {
+  font-family: 'Nunito', sans-serif;
+}
+
+.font-cookie {
+  font-family: 'CookieRun', cursive;
+}
+
+.sticker-card {
+  @apply bg-white border-2 border-brand-text rounded-2xl shadow-[4px_4px_0px_#2d2d2d] transition-all duration-300;
+}
+
+.sticker-card-hover {
+  @apply hover:shadow-[6px_6px_0px_#ac7fff] hover:-translate-x-1 hover:-translate-y-1;
+}
+
+.sticker-button {
+  @apply border-2 border-brand-text rounded-full shadow-[2px_2px_0px_#2d2d2d] transition-all duration-200 hover:shadow-[4px_4px_0px_#f28cc9] hover:-translate-x-0.5 hover:-translate-y-0.5;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.section-padding {
+  padding: 5rem 0;
+}
+
+.prose {
+  @apply text-brand-text/90;
+}
+.prose h1, .prose h2, .prose h3 {
+  @apply text-brand-text;
+}
+.prose a {
+  @apply text-brand-pink;
+}
+.prose ul > li::before {
+  @apply bg-brand-pink;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 3rem 0;
+  }
+}
