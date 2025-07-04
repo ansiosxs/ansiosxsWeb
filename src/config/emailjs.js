@@ -7,13 +7,16 @@
 
 export const emailjsConfig = {
   // Service ID - ID del servicio de email que creaste en EmailJS
-  serviceId: 'service_ansiosxs',
+  // Ejemplo: 'service_abc123'
+  serviceId: 'service_i2iqc4l',
   
   // Template ID - ID de la plantilla de email que creaste
-  templateId: 'template_contact',
+  // Ejemplo: 'template_xyz789'
+  templateId: 'YOUR_TEMPLATE_ID_HERE',
   
   // Public Key - Tu clave pública de EmailJS
-  publicKey: 'YOUR_PUBLIC_KEY_HERE'
+  // Ejemplo: 'user_public_key_123'
+  publicKey: 'OausZN2zX4s5uO1v_'
 };
 
 // Variables disponibles en el template:

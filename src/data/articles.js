@@ -14,6 +14,7 @@ export const articles = [
     author: 'Equipo ansiosxs',
     readTime: '1 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/56a44cc390f782727ddf1321ada22b5a.png',
+    previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/56a44cc390f782727ddf1321ada22b5a.png',
     isEvent: true,
     eventDate: '2025-07-08T10:00:00'
   },
@@ -32,6 +33,7 @@ export const articles = [
     author: 'Equipo ansiosxs',
     readTime: '2 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/693f8134b36aca168bc74bf2420e5e7e.png',
+    previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/693f8134b36aca168bc74bf2420e5e7e.png',
     isEvent: true,
     eventDate: '2025-07-04T14:00:00'
   },
@@ -57,6 +59,7 @@ export const articles = [
     author: 'Equipo ansiosxs',
     readTime: '3 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/270f57ff92db9efc13f5efffee842e22.png',
+    previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/270f57ff92db9efc13f5efffee842e22.png',
     isEvent: true,
     eventDate: '2025-07-11T16:30:00'
   },
@@ -75,6 +78,7 @@ export const articles = [
     date: '2025-06-24',
     author: 'Equipo ansiosxs',
     readTime: '2 min',
-    imageUrl: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop'
+    imageUrl: '/images/sitiopreview.png',
+    previewImageUrl: '/images/news-previews/sitiopreview-preview.webp'
   }
 ];

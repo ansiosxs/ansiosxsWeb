@@ -5,6 +5,7 @@ import { Calendar, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { articles } from '@/data/articles';
 import { Link } from 'react-router-dom';
+import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('todos');
@@ -107,7 +108,12 @@ const News = () => {
                     className="sticker-card sticker-card-hover overflow-hidden flex flex-col"
                   >
                     <div className="relative">
-                      <img className="w-full h-48 object-cover" alt={`Artículo: ${post.title}`} src={post.imageUrl} />
+                      <ImageWithFallback 
+                        className="w-full h-48 object-cover" 
+                        alt={`Artículo: ${post.title}`} 
+                        src={post.previewImageUrl || post.imageUrl}
+                        fallbackSrc={(post.previewImageUrl || post.imageUrl).replace('.webp', '.png')}
+                      />
                     </div>
 
                     <div className="p-6 flex flex-col flex-grow">

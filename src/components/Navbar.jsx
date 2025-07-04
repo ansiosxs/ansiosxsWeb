@@ -88,8 +88,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex-shrink-0 flex items-center">
-            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/f98ede646b4e5a62d1bb2cf105d04ad7.png" alt="Ansiosxs Nuevas Lecturas Logo" className="h-10 hidden md:block" />
-            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/30a6ebc2-adae-4ac3-ae05-32a429feedcf.png" alt="Ansiosxs Nuevas Lecturas Logo Circular" className="h-10 block md:hidden" />
+            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/f98ede646b4e5a62d1bb2cf105d04ad7.png" alt="Ansiosxs Nuevas Lecturas Logo" className="h-8 sm:h-10" />
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
