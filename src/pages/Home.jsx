@@ -244,7 +244,6 @@ const Home = () => {
                       <Calendar className="h-4 w-4 mr-1" />
                       <span>{new Date(article.date).toLocaleDateString('es-ES')}</span>
                     </div>
-                    <span className="text-sm text-brand-text/60">{article.readTime} de lectura</span>
                   </div>
                   <Link to={`/noticias/${article.slug}`} className="mt-auto">
                     <Button className="w-full bg-brand-purple hover:bg-brand-purple/90 text-white rounded-full">

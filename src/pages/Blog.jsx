@@ -25,7 +25,6 @@ const Blog = () => {
       image: 'Grandparents and grandchildren creating art together in a warm, sunlit room',
       author: 'María González',
       date: '2025-06-15',
-      readTime: '5 min',
       tags: ['intergeneracional', 'arte', 'familia']
     },
     {
@@ -36,7 +35,6 @@ const Blog = () => {
       image: 'A welcoming circle of diverse people in a bright, comfortable space with art materials',
       author: 'Carlos Ruiz',
       date: '2025-06-10',
-      readTime: '8 min',
       tags: ['facilitación', 'espacios seguros', 'metodología']
     },
     {
@@ -47,7 +45,6 @@ const Blog = () => {
       image: 'Community members sharing stories in a cozy neighborhood setting with warm lighting',
       author: 'Ana Martín',
       date: '2025-06-05',
-      readTime: '6 min',
       tags: ['storytelling', 'comunidad', 'identidad']
     },
     {
@@ -58,7 +55,6 @@ const Blog = () => {
       image: 'Adults engaged in playful creative activities with childlike wonder and joy',
       author: 'Luis Fernández',
       date: '2025-05-28',
-      readTime: '7 min',
       tags: ['infancia', 'creatividad', 'desarrollo personal']
     },
     {
@@ -69,7 +65,6 @@ const Blog = () => {
       image: 'Before and after images of a community space transformed through collaborative art projects',
       author: 'Carmen López',
       date: '2025-05-20',
-      readTime: '9 min',
       tags: ['impacto social', 'arte comunitario', 'transformación']
     },
     {
@@ -80,7 +75,6 @@ const Blog = () => {
       image: 'Teachers learning creative techniques with art supplies and educational materials',
       author: 'Equipo Ansiosxs',
       date: '2025-05-15',
-      readTime: '10 min',
       tags: ['educación', 'herramientas', 'pedagogía creativa']
     }
   ];
@@ -195,7 +189,6 @@ const Blog = () => {
                       <span className="mr-4">{filteredPosts[0].author}</span>
                       <Calendar className="h-4 w-4 mr-2" />
                       <span className="mr-4">{new Date(filteredPosts[0].date).toLocaleDateString('es-ES')}</span>
-                      <span>{filteredPosts[0].readTime} de lectura</span>
                     </div>
                     <Button 
                       onClick={() => handleReadMore(filteredPosts[0].title)}
@@ -261,8 +254,7 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-brand-text/60">{post.readTime} de lectura</span>
+                    <div className="flex items-center justify-end">
                       <Button 
                         onClick={() => handleReadMore(post.title)}
                         variant="ghost"

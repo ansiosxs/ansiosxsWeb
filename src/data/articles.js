@@ -12,7 +12,6 @@ export const articles = [
     category: 'comunicados',
     date: '2025-06-27',
     author: 'Equipo ansiosxs',
-    readTime: '1 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/56a44cc390f782727ddf1321ada22b5a.png',
     previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/56a44cc390f782727ddf1321ada22b5a.png',
     isEvent: true,
@@ -29,9 +28,8 @@ export const articles = [
       <p>La actividad es abierta y gratuita. ¡Solo necesitas tu cuaderno de bocetos y muchas ganas de crear! Nos encontraremos en la entrada del museo.</p>
     `,
     category: 'actividades',
-    date: '2025-06-26',
+    date: '2025-06-30',
     author: 'Equipo ansiosxs',
-    readTime: '2 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/693f8134b36aca168bc74bf2420e5e7e.png',
     previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/693f8134b36aca168bc74bf2420e5e7e.png',
     isEvent: true,
@@ -55,9 +53,8 @@ export const articles = [
       <p>Las inscripciones ya están abiertas. ¡No dejes pasar esta oportunidad! Para más información y para inscribirte, escríbenos a nuestro correo de contacto.</p>
     `,
     category: 'talleres',
-    date: '2025-06-25',
+    date: '2025-06-30',
     author: 'Equipo ansiosxs',
-    readTime: '3 min',
     imageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/270f57ff92db9efc13f5efffee842e22.png',
     previewImageUrl: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/270f57ff92db9efc13f5efffee842e22.png',
     isEvent: true,
@@ -75,9 +72,8 @@ export const articles = [
       <p>¡Gracias por ser parte de este sueño!</p>
     `,
     category: 'comunicados',
-    date: '2025-06-24',
+    date: '2025-07-03',
     author: 'Equipo ansiosxs',
-    readTime: '2 min',
     imageUrl: '/images/sitiopreview.png',
     previewImageUrl: '/images/news-previews/sitiopreview-preview.webp'
   }

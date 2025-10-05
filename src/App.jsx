@@ -13,6 +13,8 @@ import Article from '@/pages/Article';
 import Collaborate from '@/pages/Collaborate';
 import Contact from '@/pages/Contact';
 import CalendarPage from '@/pages/CalendarPage';
+import AdminLogin from './pages/AdminLogin';
+import AdminNews from './pages/AdminNews';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
             <Route path="/como-colaborar" element={<Collaborate />} />
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/news" element={<AdminNews />} />
           </Routes>
         </main>
         

@@ -121,7 +121,6 @@ const News = () => {
                          <span className="bg-brand-yellow text-brand-text px-3 py-1 rounded-full text-xs font-medium border-2 border-brand-text capitalize">
                           {post.category}
                          </span>
-                         <span className="text-sm text-brand-text/60">{post.readTime} de lectura</span>
                       </div>
 
                       <h3 className="font-serif text-xl font-semibold text-brand-text mb-3 line-clamp-2 flex-grow">

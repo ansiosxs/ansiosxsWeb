@@ -87,7 +87,14 @@ const Contact = () => {
         subject: formData.subject,
         message: formData.message,
         newsletter: formData.newsletter ? 'Sí' : 'No',
-        to_name: 'Ansiosxs'
+        to_name: 'Ansiosxs',
+        time: new Date().toLocaleString('es-ES', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
       };
 
       await emailjs.send(

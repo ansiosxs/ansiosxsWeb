@@ -8,11 +8,11 @@
 export const emailjsConfig = {
   // Service ID - ID del servicio de email que creaste en EmailJS
   // Ejemplo: 'service_abc123'
-  serviceId: 'service_i2iqc4l',
+  serviceId: 'service_rjxlczm',
   
   // Template ID - ID de la plantilla de email que creaste
   // Ejemplo: 'template_xyz789'
-  templateId: 'YOUR_TEMPLATE_ID_HERE',
+  templateId: 'template_7hwhs2p',
   
   // Public Key - Tu clave pública de EmailJS
   // Ejemplo: 'user_public_key_123'
@@ -26,6 +26,7 @@ export const emailjsConfig = {
 // - {{message}} - Mensaje del usuario
 // - {{newsletter}} - Si quiere recibir newsletter (Sí/No)
 // - {{to_name}} - Nombre del destinatario
+// - {{time}} - Fecha y hora del envío
 
 // Ejemplo de template HTML para EmailJS:
 /*
