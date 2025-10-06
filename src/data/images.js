@@ -112,26 +112,26 @@ export const images = {
     }
   },
   
-  // Retratos del equipo (locales para carga rápida)
+  // Retratos del equipo (optimizados para carga rápida)
   portraits: {
     hansPeralta: {
-      primary: '/images/retratos/Hans Peralta (1).png',
-      fallback: '/images/retratos/Hans Peralta (1).png',
+      primary: '/images/Retratos/hans-peralta-optimized.webp',
+      fallback: '/images/Retratos/Hans Peralta.png',
       alt: 'Retrato de Hans Peralta'
     },
-    pamelaMendoza: {
-      primary: '/images/retratos/Pamela_Mendoza (1).png',
-      fallback: '/images/retratos/Pamela_Mendoza (1).png',
-      alt: 'Retrato de Pamela Mendoza'
+    angelaRabanal: {
+      primary: '/images/Retratos/angela-rabanal-optimized.webp',
+      fallback: '/images/Retratos/Angela Rabanal.png',
+      alt: 'Retrato de Angela Rabanal'
     },
     elisaEcheverria: {
-      primary: '/images/retratos/Elisa Echeverría (1).png',
-      fallback: '/images/retratos/Elisa Echeverría (1).png',
+      primary: '/images/Retratos/elisa-echeverria-optimized.webp',
+      fallback: '/images/Retratos/Elisa Echeverría.png',
       alt: 'Retrato de Elisa Echeverría'
     },
     adrianCortes: {
-      primary: '/images/retratos/Adrián Cortes (1).png',
-      fallback: '/images/retratos/Adrián Cortes (1).png',
+      primary: '/images/Retratos/adrian-cortes-optimized.webp',
+      fallback: '/images/Retratos/Adrián Cortes.png',
       alt: 'Retrato de Adrián Cortés'
     }
   },

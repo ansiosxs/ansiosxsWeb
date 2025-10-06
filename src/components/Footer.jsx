@@ -22,7 +22,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/f98ede646b4e5a62d1bb2cf105d04ad7.png" alt="Ansiosxs Nuevas Lecturas Logo" className="h-10" />
+              <img src="/images/logo.png" alt="Ansiosxs Nuevas Lecturas Logo" className="h-10" />
             </Link>
             <p className="text-brand-text/80 mb-4 max-w-md">Un laboratorio creativo que explora la lectura más allá del papel. Llevamos las narrativas al territorio, al cuerpo y a lo colectivo, creando un cambio a través del arte.</p>
             <div className="flex space-x-4">

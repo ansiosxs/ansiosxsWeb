@@ -1,26 +1,69 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Calendar, ArrowLeft, Users } from 'lucide-react';
-import { articles } from '@/data/articles';
 import { Button } from '@/components/ui/button';
+import { articles as localArticles } from '@/data/articles';
 
 const Article = () => {
   const { articleSlug } = useParams();
   const navigate = useNavigate();
-  const article = articles.find(a => a.slug === articleSlug);
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const fetchArticle = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`http://localhost:4000/api/articles/${articleSlug}`);
+        if (!res.ok) {
+          if (res.status === 404) throw new Error('Artículo no encontrado');
+          throw new Error('Error al cargar el artículo');
+        }
+        const data = await res.json();
+        if (data && data.slug) {
+          setArticle(data);
+        } else {
+          // Fallback local por slug
+          const fallback = localArticles.find(a => a.slug === articleSlug);
+          if (!fallback) throw new Error('Artículo no encontrado');
+          setArticle(fallback);
+        }
+      } catch (err) {
+        // Siempre intenta mostrar el artículo local si la API falla
+        const fallback = localArticles.find(a => a.slug === articleSlug);
+        if (fallback) {
+          setArticle(fallback);
+          setError(null); // No mostrar error de red
+        } else {
+          setError('Artículo no encontrado');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticle();
   }, [articleSlug]);
 
-  if (!article) {
+  if (loading) {
+    return (
+      <div className="pt-16 min-h-screen flex items-center justify-center text-center">
+        <p>Cargando artículo...</p>
+      </div>
+    );
+  }
+
+  if (error || !article) {
     return (
       <div className="pt-16 min-h-screen flex items-center justify-center text-center">
         <div>
           <h1 className="text-4xl font-bold">404 - Artículo no encontrado</h1>
-          <p className="mt-4">Lo sentimos, no pudimos encontrar el artículo que buscas.</p>
+          <p className="mt-4">{error || 'Lo sentimos, no pudimos encontrar el artículo que buscas.'}</p>
           <Link to="/noticias">
             <Button className="mt-8">Volver a Noticias</Button>
           </Link>

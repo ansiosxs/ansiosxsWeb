@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles, Users, BookOpen, Palette, Calendar, ChevronLeft, ChevronRight, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { articles } from '@/data/articles';
 import { images } from '@/data/images';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
+import { articles as localArticles } from '@/data/articles';
 
 const carouselItems = [{
   image: images.carousel.main.primary,
@@ -38,6 +38,9 @@ const carouselItems = [{
 }];
 const Home = () => {
   const [index, setIndex] = useState(0);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const nextStep = () => {
     setIndex(index === carouselItems.length - 1 ? 0 : index + 1);
   };
@@ -50,6 +53,28 @@ const Home = () => {
     }, 7000);
     return () => clearInterval(interval);
   }, [index]);
+  useEffect(() => {
+    let isMounted = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('http://localhost:4000/api/articles');
+        if (!res.ok) throw new Error('Error al cargar artículos');
+        const data = await res.json();
+        const list = Array.isArray(data) && data.length ? data : localArticles;
+        if (isMounted) setArticles(list.sort((a, b) => new Date(b.date) - new Date(a.date)));
+      } catch (e) {
+        if (isMounted) {
+          setError(e.message);
+          setArticles(localArticles.sort((a, b) => new Date(b.date) - new Date(a.date)));
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    load();
+    return () => { isMounted = false; };
+  }, []);
   const proposalPoints = [{
     icon: Palette,
     title: 'Exploración Artística',
@@ -232,7 +257,7 @@ const Home = () => {
                   className="w-full h-48 object-cover" 
                   alt={article.title} 
                   src={article.previewImageUrl || article.imageUrl}
-                  fallbackSrc={(article.previewImageUrl || article.imageUrl).replace('.webp', '.png')}
+                  fallbackSrc={(article.previewImageUrl || article.imageUrl || '').replace('.webp', '.png')}
                 />
                 <div className="p-6 flex flex-col flex-grow">
                   <span className="text-sm text-brand-pink font-medium mb-2 capitalize">{article.category}</span>

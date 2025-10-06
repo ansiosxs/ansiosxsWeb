@@ -16,26 +16,26 @@ const teamMembers = [
       'Ilustrador',
       'Arquitecto',
       'Diplomado en nuevas prácticas lectoras',
-      'Diplomado en Gestión en Patrimonio Cultural'
+      'Diplomado en Gestión en Patrimonio Cultural, especialidad Didáctica del Patrimonio.'
     ],
     color: 'brand-purple'
   },
   {
-    name: 'Pamela Mendoza',
-    role: 'Vicepresidenta',
-    imageAlt: 'Retrato de Pamela Mendoza',
-    imageUrl: images.portraits.pamelaMendoza.primary,
-    fallbackUrl: images.portraits.pamelaMendoza.fallback,
+    name: 'Angela Rabanal',
+    role: 'Secretaria',
+    imageAlt: 'Retrato de Angela Rabanal',
+    imageUrl: images.portraits.angelaRabanal.primary,
+    fallbackUrl: images.portraits.angelaRabanal.fallback,
     qualifications: [
-      'Arquitecta especializada en diseño escénico',
-      'Diplomada en educación creativa',
-      'Investigación transdisciplinar'
+      'Artista Visual',
+      'Ilustradora',
+      'Mediadora de Lectura'
     ],
     color: 'brand-pink'
   },
   {
     name: 'Elisa Echeverría',
-    role: 'Secretaria',
+    role: 'Encargada de voluntariado',
     imageAlt: 'Retrato de Elisa Echeverría',
     imageUrl: images.portraits.elisaEcheverria.primary,
     fallbackUrl: images.portraits.elisaEcheverria.fallback,
@@ -195,7 +195,7 @@ const AboutUs = () => {
                   >
                     <div className="relative mx-auto mb-4">
                       <ImageWithFallback  
-                        className={`w-32 h-32 rounded-full object-cover border-4 ${memberColor.border} shadow-lg`} 
+                        className={`w-32 h-32 rounded-full object-cover object-center border-4 ${memberColor.border} shadow-lg`} 
                         alt={member.imageAlt}
                         src={member.imageUrl}
                         fallbackSrc={member.fallbackUrl}

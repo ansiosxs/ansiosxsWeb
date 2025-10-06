@@ -1,19 +1,44 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { articles } from '@/data/articles';
 import { Link } from 'react-router-dom';
+import { articles as localArticles } from '@/data/articles';
 const CalendarPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 6, 1)); // Start at July 2025
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const load = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('http://localhost:4000/api/articles');
+        if (!res.ok) throw new Error('Error al cargar artículos');
+        const data = await res.json();
+        if (isMounted) setArticles(Array.isArray(data) && data.length ? data : localArticles);
+      } catch (e) {
+        if (isMounted) {
+          setError(e.message);
+          setArticles(localArticles);
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    load();
+    return () => { isMounted = false; };
+  }, []);
 
   const events = useMemo(() => {
     return articles.filter(a => a.isEvent).map(a => ({
       ...a,
       eventDateObj: new Date(a.eventDate)
     }));
-  }, []);
+  }, [articles]);
   const changeMonth = amount => {
     setCurrentDate(prev => {
       const newDate = new Date(prev);
@@ -57,6 +82,12 @@ const CalendarPage = () => {
       </Helmet>
 
       <div className="pt-16">
+        {loading && (
+          <div className="text-center py-8">Cargando eventos...</div>
+        )}
+        {error && (
+          <div className="text-center py-8 text-red-600">{error}</div>
+        )}
         <section className="section-padding bg-brand-blue/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div initial={{

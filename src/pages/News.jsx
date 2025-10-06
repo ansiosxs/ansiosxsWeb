@@ -1,17 +1,42 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { articles } from '@/data/articles';
 import { Link } from 'react-router-dom';
+import { articles as localArticles } from '../data/articles';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('todos');
   const [searchQuery, setSearchQuery] = useState('');
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const categories = ['todos', ...new Set(articles.map(a => a.category))].map(c => ({
+  useEffect(() => {
+    setLoading(true);
+    if (localArticles && localArticles.length > 0) {
+      setArticles(localArticles);
+      setLoading(false);
+    } else {
+      const fetchNews = async () => {
+        try {
+          const res = await fetch('http://localhost:4000/api/articles');
+          if (!res.ok) throw new Error('Error al cargar noticias');
+          const data = await res.json();
+          setArticles(data);
+        } catch {
+          setArticles([]);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchNews();
+    }
+  }, []);
+
+  const categories = ['todos', ...new Set(articles.map(a => a.category || 'sin-categoria'))].map(c => ({
     id: c,
     name: c.charAt(0).toUpperCase() + c.slice(1)
   }));
@@ -32,7 +57,15 @@ const News = () => {
     }
     
     return filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, articles]);
+
+  if (loading) {
+    return <div className="pt-16 min-h-screen flex items-center justify-center text-center">Cargando noticias...</div>;
+  }
+
+  if (!articles || articles.length === 0) {
+    return <div className="pt-16 min-h-screen flex items-center justify-center text-center">No hay noticias disponibles.</div>;
+  }
 
   return (
     <>
@@ -42,6 +75,9 @@ const News = () => {
       </Helmet>
 
       <div className="pt-16 overflow-hidden">
+        {error && (
+          <div className="text-center py-8 text-red-600">{error}</div>
+        )}
         <section className="section-padding bg-brand-pink/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div 
@@ -92,29 +128,32 @@ const News = () => {
         
         <section className="section-padding bg-brand-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               <motion.div 
-                layout 
+                layout="position"
+                transition={{ layout: { duration: 0.25 } }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               >
                 {filteredPosts.map((post) => (
                   <motion.article 
-                    layout
+                    layout="position"
                     key={post.id} 
-                    initial={{ opacity: 0, scale: 0.8 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.4 }} 
+                    initial={{ opacity: 0, y: 12 }} 
+                    animate={{ opacity: 1, y: 0 }} 
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.3 }} 
                     className="sticker-card sticker-card-hover overflow-hidden flex flex-col"
                   >
-                    <div className="relative">
-                      <ImageWithFallback 
-                        className="w-full h-48 object-cover" 
-                        alt={`Artículo: ${post.title}`} 
-                        src={post.previewImageUrl || post.imageUrl}
-                        fallbackSrc={(post.previewImageUrl || post.imageUrl).replace('.webp', '.png')}
-                      />
-                    </div>
+                  {(post.previewImageUrl || post.imageUrl) && (
+  <div className="relative aspect-video">
+    <ImageWithFallback 
+      className="absolute inset-0 w-full h-full object-cover" 
+      alt={`Artículo: ${post.title}`} 
+      src={post.previewImageUrl || post.imageUrl}
+      fallbackSrc={(post.previewImageUrl || post.imageUrl || '').replace('.webp', '.png')}
+    />
+  </div>
+)}
 
                     <div className="p-6 flex flex-col flex-grow">
                       <div className="flex items-center justify-between mb-3">
