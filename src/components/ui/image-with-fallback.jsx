@@ -1,48 +1,19 @@
 import React, { useState } from 'react';
 
-const ImageWithFallback = ({ 
-  src, // WebP
-  fallbackSrc, // JPEG/PNG
-  alt, 
-  className = "", 
-  ...props 
-}) => {
-  const [imgSrc, setImgSrc] = useState(src);
-  const [hasError, setHasError] = useState(false);
+const ImageWithFallback = ({ src, alt, className, ...props }) => {
+  const [show, setShow] = useState(true);
 
-  const handleError = () => {
-    if (!hasError && fallbackSrc) {
-      setImgSrc(fallbackSrc);
-      setHasError(true);
-    }
-  };
+  if (!src || !show) return null;
 
-  // Si hay fallback, usar <picture> para WebP + fallback
-  if (fallbackSrc) {
-    return (
-      <picture>
-        <source srcSet={src} type="image/webp" />
-        <img
-          src={hasError ? fallbackSrc : src}
-          alt={alt}
-          className={className}
-          onError={handleError}
-          {...props}
-        />
-      </picture>
-    );
-  }
-
-  // Si no hay fallback, solo <img>
   return (
     <img
-      src={imgSrc}
+      src={src}
       alt={alt}
       className={className}
-      onError={handleError}
+      onError={() => setShow(false)}
       {...props}
     />
   );
 };
 
-export default ImageWithFallback; 
+export default ImageWithFallback;

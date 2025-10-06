@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Calendar, ArrowLeft, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { articles as localArticles } from '@/data/articles';
+import ImageWithFallback from '../components/ui/image-with-fallback';
 
 const Article = () => {
   const { articleSlug } = useParams();
@@ -110,6 +111,16 @@ const Article = () => {
                   </div>
                 </div>
               </div>
+
+              {(article?.previewImageUrl || article?.imageUrl) && (
+                <div className="relative aspect-video mb-6">
+                  <ImageWithFallback
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt={`Artículo: ${article.title}`}
+                    src={article.previewImageUrl || article.imageUrl}
+                  />
+                </div>
+              )}
 
               <div 
                 className="prose lg:prose-xl max-w-none mx-auto text-brand-text/90"

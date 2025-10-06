@@ -5,7 +5,7 @@ import { Calendar, ArrowRight, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { articles as localArticles } from '../data/articles';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
+import ImageWithFallback from '../components/ui/image-with-fallback';
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('todos');
@@ -146,11 +146,10 @@ const News = () => {
                   >
                   {(post.previewImageUrl || post.imageUrl) && (
   <div className="relative aspect-video">
-    <ImageWithFallback 
-      className="absolute inset-0 w-full h-full object-cover" 
-      alt={`Artículo: ${post.title}`} 
+    <ImageWithFallback
+      className="absolute inset-0 w-full h-full object-cover"
+      alt={`Artículo: ${post.title}`}
       src={post.previewImageUrl || post.imageUrl}
-      fallbackSrc={(post.previewImageUrl || post.imageUrl || '').replace('.webp', '.png')}
     />
   </div>
 )}

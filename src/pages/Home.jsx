@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Users, BookOpen, Palette, Calendar, ChevronLeft, 
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { images } from '@/data/images';
-import ImageWithFallback from '@/components/ui/image-with-fallback';
+import ImageWithFallback from '../components/ui/image-with-fallback';
 import { articles as localArticles } from '@/data/articles';
 
 const carouselItems = [{
@@ -253,12 +253,15 @@ const Home = () => {
           }} viewport={{
             once: true
           }} className="sticker-card sticker-card-hover overflow-hidden flex flex-col">
-                <ImageWithFallback 
-                  className="w-full h-48 object-cover" 
-                  alt={article.title} 
-                  src={article.previewImageUrl || article.imageUrl}
-                  fallbackSrc={(article.previewImageUrl || article.imageUrl || '').replace('.webp', '.png')}
-                />
+                {(article.previewImageUrl || article.imageUrl) && (
+                  <div className="relative aspect-video">
+                    <ImageWithFallback
+                      className="absolute inset-0 w-full h-full object-cover"
+                      alt={`Artículo: ${article.title}`}
+                      src={article.previewImageUrl || article.imageUrl}
+                    />
+                  </div>
+                )}
                 <div className="p-6 flex flex-col flex-grow">
                   <span className="text-sm text-brand-pink font-medium mb-2 capitalize">{article.category}</span>
                   <h3 className="font-serif text-xl font-semibold text-brand-text mb-3 flex-grow">

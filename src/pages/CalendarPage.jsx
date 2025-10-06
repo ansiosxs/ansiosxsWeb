@@ -5,8 +5,12 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { articles as localArticles } from '@/data/articles';
+
+const today = new Date();
+
 const CalendarPage = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 6, 1)); // Start at July 2025
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +26,7 @@ const CalendarPage = () => {
         if (isMounted) setArticles(Array.isArray(data) && data.length ? data : localArticles);
       } catch (e) {
         if (isMounted) {
-          setError(e.message);
+          // No mostrar error de red, solo usar los artículos locales
           setArticles(localArticles);
         }
       } finally {
@@ -40,14 +44,14 @@ const CalendarPage = () => {
     }));
   }, [articles]);
   const changeMonth = amount => {
-    setCurrentDate(prev => {
-      const newDate = new Date(prev);
-      newDate.setMonth(newDate.getMonth() + amount);
-      return newDate;
+    setCurrentMonth(prev => {
+      const newDate = new Date(currentYear, prev + amount);
+      setCurrentYear(newDate.getFullYear());
+      return newDate.getMonth();
     });
   };
-  const month = currentDate.getMonth();
-  const year = currentDate.getFullYear();
+  const month = currentMonth;
+  const year = currentYear;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const calendarDays = [];
@@ -82,12 +86,6 @@ const CalendarPage = () => {
       </Helmet>
 
       <div className="pt-16">
-        {loading && (
-          <div className="text-center py-8">Cargando eventos...</div>
-        )}
-        {error && (
-          <div className="text-center py-8 text-red-600">{error}</div>
-        )}
         <section className="section-padding bg-brand-blue/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div initial={{
@@ -124,7 +122,7 @@ const CalendarPage = () => {
                   <ChevronLeft />
                 </Button>
                 <h2 className="font-serif text-2xl md:text-3xl font-bold text-brand-text text-center">
-                  {currentDate.toLocaleString('es-ES', {
+                  {new Date(year, month).toLocaleString('es-ES', {
                   month: 'long',
                   year: 'numeric'
                 })}
