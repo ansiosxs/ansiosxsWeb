@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Users, BookOpen, Palette, Calendar, ChevronLeft, ChevronRight, Share2 } from 'lucide-react';
+import { ArrowRight, Sparkles, Users, BookOpen, Palette, Calendar, ChevronLeft, ChevronRight, Share2, Library, Truck, BookHeart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { images } from '@/data/images';
 import ImageWithFallback from '../components/ui/image-with-fallback';
-import { articles as localArticles } from '@/data/articles';
 
 const carouselItems = [{
   image: images.carousel.main.primary,
@@ -38,9 +37,6 @@ const carouselItems = [{
 }];
 const Home = () => {
   const [index, setIndex] = useState(0);
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const nextStep = () => {
     setIndex(index === carouselItems.length - 1 ? 0 : index + 1);
   };
@@ -53,28 +49,6 @@ const Home = () => {
     }, 7000);
     return () => clearInterval(interval);
   }, [index]);
-  useEffect(() => {
-    let isMounted = true;
-    const load = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('http://localhost:4000/api/articles');
-        if (!res.ok) throw new Error('Error al cargar artículos');
-        const data = await res.json();
-        const list = Array.isArray(data) && data.length ? data : localArticles;
-        if (isMounted) setArticles(list.sort((a, b) => new Date(b.date) - new Date(a.date)));
-      } catch (e) {
-        if (isMounted) {
-          setError(e.message);
-          setArticles(localArticles.sort((a, b) => new Date(b.date) - new Date(a.date)));
-        }
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    load();
-    return () => { isMounted = false; };
-  }, []);
   const proposalPoints = [{
     icon: Palette,
     title: 'Exploración Artística',
@@ -88,7 +62,36 @@ const Home = () => {
     title: 'Encuentro y Transformación',
     description: 'Abrimos espacios seguros para imaginar, a través del juego y la conversación, otras formas de vivir, sentir y conectar con lxs demás.'
   }];
-  const latestArticles = articles.slice(0, 3);
+  
+  const projectsData = [
+    {
+      id: 'te-leo-te-dibujo',
+      icon: BookHeart,
+      color: 'brand-pink',
+      title: 'Te leo, te dibujo',
+      description: 'Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos',
+      image: images.projects.teLeoTeDibujo.primary,
+      link: '/projects#te-leo-te-dibujo'
+    },
+    {
+      id: 'insectaria',
+      icon: Library,
+      color: 'brand-blue',
+      title: 'Insectaria',
+      description: 'Biblioteca comunitaria especializada en narrativas ilustradas',
+      image: images.projects.insectaria.primary,
+      link: '/projects#insectaria'
+    },
+    {
+      id: 'bibliomovil',
+      icon: Truck,
+      color: 'brand-yellow',
+      title: 'Bibliomóvil',
+      description: 'Nuevas Lecturas Móviles – Ruta Costera',
+      image: images.projects.bibliomovil.primary,
+      link: '/projects#bibliomovil'
+    }
+  ];
   return <>
       <Helmet>
         <title>Inicio - Ansiosxs – Nuevas Lecturas</title>
@@ -176,7 +179,7 @@ const Home = () => {
       </section>
 
       <section className="section-padding bg-white relative overflow-hidden">
-        <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/d2fc7e35bdb6c324a86481c64d0878d2.png" alt="Mascota decorativa" className="absolute -top-8 -left-10 w-32 h-auto transform -rotate-12 hidden lg:block pointer-events-none opacity-50" />
+        <img src="/uploads/mascota-decorativa-2.png" alt="Mascota decorativa" className="absolute -top-8 -left-10 w-32 h-auto transform -rotate-12 hidden lg:block pointer-events-none opacity-50" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{
           opacity: 0,
@@ -236,12 +239,12 @@ const Home = () => {
           once: true
         }} className="text-center mb-16 relative">
             <h2 className="font-cookie text-3xl md:text-4xl font-bold text-brand-text mb-4">
-              Últimas Noticias
+              Nuestros Proyectos
             </h2>
-            <p className="text-lg text-brand-text/80 max-w-2xl mx-auto">Descubre nuestras últimas noticias, historias y novedades.</p>
+            <p className="text-lg text-brand-text/80 max-w-2xl mx-auto">Descubre nuestras iniciativas creativas que transforman comunidades a través del arte y la lectura.</p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {latestArticles.map((article, index) => <motion.div key={article.id} initial={{
+            {projectsData.map((project, index) => <motion.div key={project.id} initial={{
             opacity: 0,
             y: 30
           }} whileInView={{
@@ -253,29 +256,28 @@ const Home = () => {
           }} viewport={{
             once: true
           }} className="sticker-card sticker-card-hover overflow-hidden flex flex-col">
-                {(article.previewImageUrl || article.imageUrl) && (
-                  <div className="relative aspect-video">
-                    <ImageWithFallback
-                      className="absolute inset-0 w-full h-full object-cover"
-                      alt={`Artículo: ${article.title}`}
-                      src={article.previewImageUrl || article.imageUrl}
-                    />
-                  </div>
-                )}
-                <div className="p-6 flex flex-col flex-grow">
-                  <span className="text-sm text-brand-pink font-medium mb-2 capitalize">{article.category}</span>
-                  <h3 className="font-serif text-xl font-semibold text-brand-text mb-3 flex-grow">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center justify-between text-sm text-brand-text/60 mb-4">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>{new Date(article.date).toLocaleDateString('es-ES')}</span>
+                <div className="relative aspect-video">
+                  <ImageWithFallback
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt={project.title}
+                    src={project.image}
+                  />
+                  <div className="absolute top-4 left-4">
+                    <div className={`w-12 h-12 bg-${project.color}/30 rounded-full flex items-center justify-center border-2 border-brand-text`}>
+                      <project.icon className="h-6 w-6 text-brand-text" />
                     </div>
                   </div>
-                  <Link to={`/noticias/${article.slug}`} className="mt-auto">
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="font-serif text-xl font-semibold text-brand-text mb-3 flex-grow">
+                    {project.title}
+                  </h3>
+                  <p className="text-brand-text/80 text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                  <Link to={project.link} className="mt-auto">
                     <Button className="w-full bg-brand-purple hover:bg-brand-purple/90 text-white rounded-full">
-                      Leer Más
+                      Conocer Más
                     </Button>
                   </Link>
                 </div>
@@ -293,9 +295,9 @@ const Home = () => {
         }} viewport={{
           once: true
         }} className="text-center mt-12">
-            <Link to="/noticias">
+            <Link to="/projects">
               <Button size="lg" className="bg-brand-blue text-brand-text px-8 py-3 sticker-button">
-                Ver Todas las Noticias
+                Ver Todos los Proyectos
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>

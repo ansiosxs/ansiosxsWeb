@@ -40,8 +40,6 @@ const Navbar = () => {
         { name: "Colaboraciones", path: "/projects#colaboraciones" },
       ]
     },
-    { name: 'Noticias', path: '/noticias' },
-    { name: 'Calendario', path: '/calendario' },
     { name: 'Como colaborar', path: '/como-colaborar' },
     { name: 'Contacto', path: '/contact' },
   ];

@@ -8,11 +8,8 @@ import Footer from '@/components/Footer';
 import Home from '@/pages/Home';
 import AboutUs from '@/pages/AboutUs';
 import Projects from '@/pages/Projects';
-import News from '@/pages/News';
-import Article from '@/pages/Article';
 import Collaborate from '@/pages/Collaborate';
 import Contact from '@/pages/Contact';
-import CalendarPage from '@/pages/CalendarPage';
 /*import AdminLogin from './pages/AdminLogin';
 import AdminNews from './pages/AdminNews'; */
 
@@ -32,10 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/quienes-somos" element={<AboutUs />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/noticias" element={<News />} />
-            <Route path="/noticias/:articleSlug" element={<Article />} />
             <Route path="/como-colaborar" element={<Collaborate />} />
-            <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/contact" element={<Contact />} />
             {/* Admin Routes 
             <Route path="/admin/login" element={<AdminLogin />} />

@@ -176,7 +176,7 @@ const Projects = () => {
               </p>
             </motion.div>
           </div>
-          <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/89310d220b103795d91bc0fb1a4c69ef.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-20 h-auto transform hidden lg:block pointer-events-none" />
+          <img src="/uploads/mascota-decorativa-1.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-20 h-auto transform hidden lg:block pointer-events-none" />
         </section>
 
         <ProjectSection id="te-leo-te-dibujo" icon={BookHeart} color="brand-pink" title="Te leo, te dibujo" imageAlt="Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos" imageUrl={images.projects.teLeoTeDibujo.primary} fallbackUrl={images.projects.teLeoTeDibujo.fallback}>
@@ -191,7 +191,7 @@ const Projects = () => {
           <p className="font-semibold text-brand-text">El club propone espacios de diálogo en torno a la narrativa gráfica, explorando su vínculo con otras disciplinas artísticas. Buscamos promover el disfrute lector, el pensamiento crítico y la creatividad a través del lenguaje visual.</p>
         </ProjectSection>
 
-        <ProjectSection id="insectaria" icon={Library} color="brand-blue" title="Insectaria" imageAlt="Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes" imageUrl="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/8fb710186ec1a25aef25363aec67dd83.jpg" reverse={true}>
+        <ProjectSection id="insectaria" icon={Library} color="brand-blue" title="Insectaria" imageAlt="Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes" imageUrl={images.projects.insectaria.primary} reverse={true}>
           <h3 className="font-sans font-bold text-xl text-brand-text mb-3">Biblioteca Comunitaria Ilustrada</h3>
           <p className="text-brand-text/80 leading-relaxed mb-4">En 2022, Ansiosxs Nuevas Lecturas inauguró Insectaria, una biblioteca comunitaria autogestionada y especializada en narrativas ilustradas. Este espacio nació gracias a donaciones de la ex Biblioteca Viva y a un convenio con el SLEP Andalién Sur y el Liceo de Adultos José Manuel Balmaceda, que nos permite utilizar parte de sus instalaciones frente a la plaza Condell, en Concepción.</p>
           <p className="text-brand-text/80 leading-relaxed mb-4">&nbsp;</p>
@@ -216,7 +216,7 @@ const Projects = () => {
           </p>
         </ProjectSection>
 
-        <ProjectSection id="talleres" icon={Palette} color="brand-pink" title="Talleres Crea-Expresa" imageAlt="Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna" imageUrl="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/2eba68ce2b5093f0aab1a3c81473f800.jpg" reverse={true}>
+        <ProjectSection id="talleres" icon={Palette} color="brand-pink" title="Talleres Crea-Expresa" imageAlt="Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna" imageUrl={images.projects.talleres.primary} reverse={true}>
             <p className="text-brand-text/80 leading-relaxed mb-4 font-semibold">
                 Arte, narrativa y comunidad para transformar el mundo desde la infancia y la diversidad.
             </p>
@@ -288,7 +288,7 @@ const Projects = () => {
         </section>
 
         <section className="section-padding bg-white relative">
-            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/d2c1b7a20fd443774c5d410b77c27201.png" alt="Mascota decorativa" className="absolute top-10 -right-5 w-24 h-auto transform -scale-x-100 rotate-12 hidden lg:block pointer-events-none" />
+            <img src="/uploads/mascota-pajarito.png" alt="Mascota decorativa" className="absolute top-10 -right-5 w-24 h-auto transform -scale-x-100 rotate-12 hidden lg:block pointer-events-none" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                  <motion.div initial={{
             opacity: 0,

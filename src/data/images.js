@@ -13,13 +13,13 @@ export const images = {
       alt: 'Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos'
     },
     insectaria: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/8fb710186ec1a25aef25363aec67dd83.jpg',
-      fallback: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2028&auto=format&fit=crop',
+      primary: '/uploads/insectaria-library.jpg',
+      fallback: '/uploads/insectaria-library.jpg',
       alt: 'Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes'
     },
     talleres: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/2eba68ce2b5093f0aab1a3c81473f800.jpg',
-      fallback: 'https://images.unsplash.com/photo-1587712471859-932fab4b9802?q=80&w=2076&auto=format&fit=crop',
+      primary: '/uploads/talleres-crea-expresa.jpg',
+      fallback: '/uploads/talleres-crea-expresa.jpg',
       alt: 'Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna'
     }
   },
@@ -91,23 +91,23 @@ export const images = {
   // Mascotas decorativas
   mascots: {
     bird1: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/d2fc7e35bdb6c324a86481c64d0878d2.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/uploads/mascota-decorativa-2.png',
+      fallback: '/uploads/mascota-decorativa-2.png',
       alt: 'Mascota decorativa'
     },
     bird2: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/89310d220b103795d91bc0fb1a4c69ef.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/uploads/mascota-decorativa-1.png',
+      fallback: '/uploads/mascota-decorativa-1.png',
       alt: 'Mascota decorativa'
     },
     bird3: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/aa42f31949c4974b5ce961d1973fba8c.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/uploads/mascota-decorativa-3.png',
+      fallback: '/uploads/mascota-decorativa-3.png',
       alt: 'Mascota decorativa'
     },
     bird4: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/d2c1b7a20fd443774c5d410b77c27201.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/uploads/mascota-pajarito.png',
+      fallback: '/uploads/mascota-pajarito.png',
       alt: 'Mascota decorativa'
     }
   },

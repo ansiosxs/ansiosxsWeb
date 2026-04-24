@@ -116,7 +116,7 @@ const AboutUs = () => {
         </section>
 
         <section className="section-padding bg-white relative">
-          <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/d2fc7e35bdb6c324a86481c64d0878d2.png" alt="Mascota decorativa" className="absolute top-0 -left-5 w-40 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
+          <img src="/uploads/mascota-decorativa-2.png" alt="Mascota decorativa" className="absolute top-0 -left-5 w-40 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -141,7 +141,7 @@ const AboutUs = () => {
         </section>
 
         <section className="section-padding bg-brand-blue/10 relative">
-          <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/89310d220b103795d91bc0fb1a4c69ef.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-48 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
+          <img src="/uploads/mascota-decorativa-1.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-48 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -163,7 +163,7 @@ const AboutUs = () => {
         </section>
 
         <section className="section-padding bg-white relative">
-          <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/aa42f31949c4974b5ce961d1973fba8c.png" alt="Mascota decorativa" className="absolute bottom-0 left-5 w-40 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
+          <img src="/uploads/mascota-decorativa-3.png" alt="Mascota decorativa" className="absolute bottom-0 left-5 w-40 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
