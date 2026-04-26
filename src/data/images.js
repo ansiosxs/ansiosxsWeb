@@ -13,13 +13,13 @@ export const images = {
       alt: 'Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos'
     },
     insectaria: {
-      primary: '/uploads/insectaria-library.jpg',
-      fallback: '/uploads/insectaria-library.jpg',
+      primary: '/images/bibliomovil.jpeg',
+      fallback: '/images/bibliomovil.jpeg',
       alt: 'Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes'
     },
     talleres: {
-      primary: '/uploads/talleres-crea-expresa.jpg',
-      fallback: '/uploads/talleres-crea-expresa.jpg',
+      primary: '/images/TLTD4.jpg',
+      fallback: '/images/TLTD4.jpg',
       alt: 'Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna'
     }
   },
@@ -91,23 +91,23 @@ export const images = {
   // Mascotas decorativas
   mascots: {
     bird1: {
-      primary: '/uploads/mascota-decorativa-2.png',
-      fallback: '/uploads/mascota-decorativa-2.png',
+      primary: '/images/logo.png',
+      fallback: '/images/logo.png',
       alt: 'Mascota decorativa'
     },
     bird2: {
-      primary: '/uploads/mascota-decorativa-1.png',
-      fallback: '/uploads/mascota-decorativa-1.png',
+      primary: '/images/logocircular.png',
+      fallback: '/images/logocircular.png',
       alt: 'Mascota decorativa'
     },
     bird3: {
-      primary: '/uploads/mascota-decorativa-3.png',
-      fallback: '/uploads/mascota-decorativa-3.png',
+      primary: '/images/logo.png',
+      fallback: '/images/logo.png',
       alt: 'Mascota decorativa'
     },
     bird4: {
-      primary: '/uploads/mascota-pajarito.png',
-      fallback: '/uploads/mascota-pajarito.png',
+      primary: '/images/logocircular.png',
+      fallback: '/images/logocircular.png',
       alt: 'Mascota decorativa'
     }
   },

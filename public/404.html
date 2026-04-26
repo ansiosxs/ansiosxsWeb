@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ansiosxs – Nuevas Lecturas</title>
+  <script type="text/javascript">
+    // GitHub Pages workaround para React Router
+    // Redirige todas las rutas a index.html
+    var path = window.location.pathname;
+    var segments = path.split('/');
+    var repo = 'ansiosxsWeb'; // Reemplaza con el nombre de tu repositorio
+    
+    if (segments[1] === repo && segments.length > 2) {
+      window.location.replace('/' + repo + '/#' + path);
+    } else if (segments[1] !== repo && segments.length > 1) {
+      window.location.replace('/#' + path);
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <p>Redirigiendo...</p>
+  </div>
+</body>
+</html>
