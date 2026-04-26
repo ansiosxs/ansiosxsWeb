@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/Navbar';
@@ -14,6 +14,14 @@ import Contact from '@/pages/Contact';
 import AdminNews from './pages/AdminNews'; */
 
 function App() {
+  // Manejar redirección para GitHub Pages
+  if (window.location.search.includes('p=')) {
+    const path = new URLSearchParams(window.location.search).get('p');
+    if (path) {
+      window.history.replaceState(null, null, path);
+    }
+  }
+
   return (
     <Router>
       <div className="min-h-screen">
