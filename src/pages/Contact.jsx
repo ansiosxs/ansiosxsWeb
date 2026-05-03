@@ -177,7 +177,7 @@ const Contact = () => {
                 Nos encanta conocer a personas interesadas en el arte, la narrativa y la transformación social. 
                 ¡Hablemos sobre cómo podemos crear juntos!
               </p>
-              <img src="/uploads/mascota-decorativa-3.png" alt="Mascota decorativa" className="absolute -bottom-20 -left-10 w-24 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
+              <img src="/images/mascotas/lobo.png" alt="Mascota decorativa" className="absolute -bottom-20 -left-10 w-24 h-auto transform -rotate-12 hidden lg:block pointer-events-none" />
             </motion.div>
           </div>
         </section>

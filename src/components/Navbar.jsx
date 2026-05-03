@@ -94,14 +94,17 @@ const Navbar = () => {
               item.subItems ? (
                 <DropdownMenu key={item.name}>
                   <DropdownMenuTrigger asChild>
-                    <button className={`flex items-center font-medium transition-colors duration-200 ${hoverColor} ${
-                      location.pathname.startsWith(item.path)
-                        ? activeColor
-                        : linkColor
-                    }`}>
+                    <Link
+                      to={item.path}
+                      className={`flex items-center font-medium transition-colors duration-200 ${hoverColor} ${
+                        location.pathname.startsWith(item.path)
+                          ? activeColor
+                          : linkColor
+                      }`}
+                    >
                       {item.name}
                       <ChevronDown className="ml-1 h-4 w-4" />
-                    </button>
+                    </Link>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     {item.subItems.map((subItem) => (

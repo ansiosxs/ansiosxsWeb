@@ -10,6 +10,7 @@ if (isDev) {
 	editModeDevPlugin = (await import('./plugins/visual-editor/vite-plugin-edit-mode.js')).default;
 }
 
+
 const configHorizonsViteErrorHandler = `
 const observer = new MutationObserver((mutations) => {
 	for (const mutation of mutations) {
@@ -191,7 +192,7 @@ logger.error = (msg, options) => {
 
 export default defineConfig({
 	customLogger: logger,
-	base: process.env.NODE_ENV === 'production' ? '/ansiosxsWeb/' : '/',
+	base: '/',
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin()] : []),
 		react(),
@@ -217,7 +218,18 @@ export default defineConfig({
 				'@babel/traverse',
 				'@babel/generator',
 				'@babel/types'
-			]
-		}
+			],
+			output: {
+				manualChunks: {
+					vendor: ['react', 'react-dom', 'react-router-dom'],
+					ui: ['framer-motion', '@radix-ui/react-dialog', '@radix-ui/react-tabs'],
+					utils: ['clsx', 'tailwind-merge']
+				}
+			}
+		},
+		minify: 'terser',
+		sourcemap: false,
+		chunkSizeWarningLimit: 1000,
+		assetsInlineLimit: 4096
 	}
 });

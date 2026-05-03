@@ -1,26 +1,42 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
 
-/* Cookie Run Font */
+/* Cookie Run Font - Optimizado para carga */
 @font-face {
   font-family: 'CookieRun';
-  src: url('./cookierun/CookieRun Regular.otf') format('opentype');
+  src: 
+    url('./cookierun/CookieRun Regular.otf') format('opentype'),
+    url('./cookierun/CookieRun Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap; /* Evita flash de texto */
 }
 
 @font-face {
   font-family: 'CookieRun';
-  src: url('./cookierun/CookieRun Bold.otf') format('opentype');
+  src: 
+    url('./cookierun/CookieRun Bold.otf') format('opentype'),
+    url('./cookierun/CookieRun Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap; /* Evita flash de texto */
 }
 
 @font-face {
   font-family: 'CookieRun';
-  src: url('./cookierun/CookieRun Black.otf') format('opentype');
+  src: 
+    url('./cookierun/CookieRun Black.otf') format('opentype'),
+    url('./cookierun/CookieRun Black.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
+  font-display: swap; /* Evita flash de texto */
+}
+
+/* Fuentes de sistema para mejor rendimiento */
+.system-font {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
 @tailwind base;

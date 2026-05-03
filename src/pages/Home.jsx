@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Users, BookOpen, Palette, Calendar, ChevronLeft, 
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { images } from '@/data/images';
-import ImageWithFallback from '../components/ui/image-with-fallback';
+import OptimizedImage from '../components/ui/optimized-image';
 
 const carouselItems = [{
   image: images.carousel.main.primary,
@@ -110,13 +110,37 @@ const Home = () => {
           duration: 1.5,
           ease: "easeInOut"
         }} className="absolute inset-0 z-0">
-            <ImageWithFallback
-              src={carouselItems[index].image}
-              fallbackSrc={carouselItems[index].fallback}
-              alt={carouselItems[index].alt}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="relative w-full h-full">
+              {/* Placeholder con aspect-ratio para evitar layout shift */}
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/20 to-brand-purple/20" />
+              
+              {/* Imagen optimizada con srcset */}
+              <picture>
+                <source 
+                  srcSet="/images/carousel/main.webp 1200w, /images/carousel/main.webp 800w, /images/carousel/main.webp 600w"
+                  sizes="100vw"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/carousel/main.jpg"
+                  srcSet="/images/carousel/main.jpg 1200w, /images/carousel/main.jpg 800w, /images/carousel/main.jpg 600w"
+                  sizes="100vw"
+                  alt={carouselItems[index].alt}
+                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="sync"
+                  style={{ aspectRatio: '16/9' }}
+                  onError={(e) => {
+                    console.error('Error cargando imagen del carrusel:', carouselItems[index].image);
+                    e.target.src = carouselItems[index].fallback;
+                  }}
+                />
+              </picture>
+              
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/50" />
+            </div>
           </motion.div>
         </AnimatePresence>
         
@@ -179,7 +203,7 @@ const Home = () => {
       </section>
 
       <section className="section-padding bg-white relative overflow-hidden">
-        <img src="/uploads/mascota-decorativa-2.png" alt="Mascota decorativa" className="absolute -top-8 -left-10 w-32 h-auto transform -rotate-12 hidden lg:block pointer-events-none opacity-50" />
+        <img src="/images/mascotas/serpi.png" alt="Mascota decorativa" className="absolute top-2 -left-10 w-32 h-auto transform -rotate-12 hidden lg:block pointer-events-none opacity-50" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{
           opacity: 0,
@@ -257,16 +281,14 @@ const Home = () => {
             once: true
           }} className="sticker-card sticker-card-hover overflow-hidden flex flex-col">
                 <div className="relative aspect-video">
-                  <ImageWithFallback
+                  <OptimizedImage
                     className="absolute inset-0 w-full h-full object-cover"
                     alt={project.title}
                     src={project.image}
+                    width={600}
+                    height={400}
                   />
-                  <div className="absolute top-4 left-4">
-                    <div className={`w-12 h-12 bg-${project.color}/30 rounded-full flex items-center justify-center border-2 border-brand-text`}>
-                      <project.icon className="h-6 w-6 text-brand-text" />
-                    </div>
-                  </div>
+
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
                   <h3 className="font-serif text-xl font-semibold text-brand-text mb-3 flex-grow">

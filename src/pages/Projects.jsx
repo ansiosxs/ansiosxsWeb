@@ -176,7 +176,7 @@ const Projects = () => {
               </p>
             </motion.div>
           </div>
-          <img src="/uploads/mascota-decorativa-1.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-20 h-auto transform hidden lg:block pointer-events-none" />
+          <img src="/images/mascotas/ave.png" alt="Mascota decorativa" className="absolute bottom-0 -right-4 w-20 h-auto transform hidden lg:block pointer-events-none" />
         </section>
 
         <ProjectSection id="te-leo-te-dibujo" icon={BookHeart} color="brand-pink" title="Te leo, te dibujo" imageAlt="Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos" imageUrl={images.projects.teLeoTeDibujo.primary} fallbackUrl={images.projects.teLeoTeDibujo.fallback}>
@@ -288,7 +288,7 @@ const Projects = () => {
         </section>
 
         <section className="section-padding bg-white relative">
-            <img src="/uploads/mascota-pajarito.png" alt="Mascota decorativa" className="absolute top-10 -right-5 w-24 h-auto transform -scale-x-100 rotate-12 hidden lg:block pointer-events-none" />
+            <img src="/images/mascotas/serpi.png" alt="Mascota decorativa" className="absolute top-10 -right-5 w-24 h-auto transform -scale-x-100 rotate-12 hidden lg:block pointer-events-none" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                  <motion.div initial={{
             opacity: 0,

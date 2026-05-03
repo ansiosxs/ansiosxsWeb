@@ -8,18 +8,18 @@ export const images = {
       alt: 'Un bibliomóvil colorido estacionado en una caleta costera, con gente leyendo libros al aire libre'
     },
     teLeoTeDibujo: {
-      primary: '/images/TLTD4.jpg',
-      fallback: '/images/TLTD4.jpg',
+      primary: '/images/tltd4_mini.jpg',
+      fallback: '/images/tltd4_mini.jpg',
       alt: 'Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos'
     },
     insectaria: {
-      primary: '/images/bibliomovil.jpeg',
-      fallback: '/images/bibliomovil.jpeg',
+      primary: '/images/librero.jpg',
+      fallback: '/images/librero.webp',
       alt: 'Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes'
     },
     talleres: {
-      primary: '/images/TLTD4.jpg',
-      fallback: '/images/TLTD4.jpg',
+      primary: '/images/taller.jpg',
+      fallback: '/images/taller.jpg',
       alt: 'Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna'
     }
   },
@@ -27,58 +27,58 @@ export const images = {
   // Logos de colaboradores
   logos: {
     laFuente: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/22122106f5029b5e3c2d530308104000.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/la-fuente.png',
+      fallback: '/images/logos/la-fuente.png',
       alt: 'Logo La Fuente'
     },
     vivaLeerCopec: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/4a905b468a08082bd519b0826a586cf4.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/viva-leer-copec.png',
+      fallback: '/images/logos/viva-leer-copec.png',
       alt: 'Logo Viva Leer Copec'
     },
     planNacionalLectura: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/78e921dfd54fea4315ab822d5d284f50.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/plan-nacional-lectura.png',
+      fallback: '/images/logos/plan-nacional-lectura.png',
       alt: 'Logo Plan Nacional de la Lectura'
     },
     injuv: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/6a790d2fc28f549f70361186469b0f83.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/injuv.png',
+      fallback: '/images/logos/injuv.png',
       alt: 'Logo INJUV'
     },
     udec: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/0d3008ac0a24ea9ee4d101777d96b6ae.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/udec.png',
+      fallback: '/images/logos/udec.png',
       alt: 'Logo Universidad de Concepción'
     },
     oficinaDiversidad: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/6f805cdd3d01f648e27e317009259f72.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/oficina-diversidad.png',
+      fallback: '/images/logos/oficina-diversidad.png',
       alt: 'Logo Oficina de Diversidad Sexual de Concepción'
     },
     liceoBalmaceda: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/e944eb4a6ff9883eef5dc85adcfb659b.jpg',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/liceo-balmaceda.jpg',
+      fallback: '/images/logos/liceo-balmaceda.jpg',
       alt: 'Logo Liceo de Adultos José Manuel Balmaceda'
     },
     servicioPatrimonio: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/74d73e01dd6bd68e34b41ef7152e9505.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/servicio-patrimonio.png',
+      fallback: '/images/logos/servicio-patrimonio.png',
       alt: 'Logo Servicio Nacional del Patrimonio Cultural'
     },
     fanzineichon: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/1bef6c2d862997017e34f233f101e7f9.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/fanzineichon.png',
+      fallback: '/images/logos/fanzineichon.png',
       alt: 'Logo Fanzineichon'
     },
     superacionPobreza: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/b145940c7f149483b5c03ecf333c7c69.png',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/superacion-pobreza.png',
+      fallback: '/images/logos/superacion-pobreza.png',
       alt: 'Logo Fundación Superación de la Pobreza'
     },
     ubb: {
-      primary: 'https://storage.googleapis.com/hostinger-horizons-assets-prod/30a6ebc2-adae-4ac3-ae05-32a429feedcf/24bd539e017402fb3f639d34e3b3fe59.webp',
-      fallback: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop',
+      primary: '/images/logos/ubb.webp',
+      fallback: '/images/logos/ubb.webp',
       alt: 'Logo Universidad del Bío-Bío'
     },
     uss: {
@@ -91,23 +91,23 @@ export const images = {
   // Mascotas decorativas
   mascots: {
     bird1: {
-      primary: '/images/logo.png',
-      fallback: '/images/logo.png',
+      primary: '/images/mascotas/ave.png',
+      fallback: '/images/mascotas/ave.png',
       alt: 'Mascota decorativa'
     },
     bird2: {
-      primary: '/images/logocircular.png',
-      fallback: '/images/logocircular.png',
+      primary: '/images/mascotas/bicho.png',
+      fallback: '/images/mascotas/bicho.png',
       alt: 'Mascota decorativa'
     },
     bird3: {
-      primary: '/images/logo.png',
-      fallback: '/images/logo.png',
+      primary: '/images/mascotas/lobo.png',
+      fallback: '/images/mascotas/lobo.png',
       alt: 'Mascota decorativa'
     },
     bird4: {
-      primary: '/images/logocircular.png',
-      fallback: '/images/logocircular.png',
+      primary: '/images/mascotas/serpi.png',
+      fallback: '/images/mascotas/serpi.png',
       alt: 'Mascota decorativa'
     }
   },
@@ -136,16 +136,17 @@ export const images = {
     }
   },
   
-  // Imágenes del carrusel (locales para carga rápida)
   carousel: {
     main: {
-      primary: '/images/carousel/main.webp',
-      fallback: '/images/carousel/main.jpeg',
-      alt: 'Imagen principal del carrusel - Biblioteca comunitaria'
+      primary: '/images/carousel/main.jpg',
+      fallback: '/images/carousel/main.webp',
+      alt: 'Imagen principal del carrusel - Biblioteca comunitaria',
+      width: 1200,
+      height: 600
     }
   },
   
-  // Imágenes de la página "Quienes Somos"
+
   about: {
     librero: {
       primary: '/images/librero.webp',
@@ -160,7 +161,7 @@ export const getImageUrl = (imageKey, category = 'projects') => {
   const image = images[category]?.[imageKey];
   if (!image) {
     console.warn(`Image not found: ${category}.${imageKey}`);
-    return 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop';
+    return '/images/logo.png';
   }
   return image.primary;
 };
