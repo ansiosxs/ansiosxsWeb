@@ -3,23 +3,23 @@ export const images = {
   // Imágenes de proyectos
   projects: {
     bibliomovil: {
-      primary: '/images/bibliomovil.jpeg',
-      fallback: '/images/bibliomovil.jpeg',
+      primary: '/images/proyectos/bibliomovil.jpeg',
+      fallback: '/images/proyectos/bibliomovil.jpeg',
       alt: 'Un bibliomóvil colorido estacionado en una caleta costera, con gente leyendo libros al aire libre'
     },
     teLeoTeDibujo: {
-      primary: '/images/tltd4_mini.jpg',
-      fallback: '/images/tltd4_mini.jpg',
+      primary: '/images/proyectos/tltd4_mini.jpg',
+      fallback: '/images/proyectos/tltd4_mini.jpg',
       alt: 'Club de lectura de narrativa gráfica con gente dibujando y leyendo cómics juntos'
     },
     insectaria: {
-      primary: '/images/librero.jpg',
-      fallback: '/images/librero.webp',
+      primary: '/images/proyectos/librero.jpg',
+      fallback: '/images/proyectos/librero.webp',
       alt: 'Una acogedora biblioteca comunitaria llena de libros ilustrados, con niños y adultos explorando los estantes'
     },
     talleres: {
-      primary: '/images/taller.jpg',
-      fallback: '/images/taller.jpg',
+      primary: '/images/proyectos/taller.jpg',
+      fallback: '/images/proyectos/taller.jpg',
       alt: 'Un collage de fotos de talleres de arte: creación de cómics, kamishibai, dibujo de flora y fauna'
     }
   },
@@ -115,31 +115,27 @@ export const images = {
   // Retratos del equipo (optimizados para carga rápida)
   portraits: {
     hansPeralta: {
-      primary: '/images/Retratos/hans-peralta-optimized.webp',
-      fallback: '/images/Retratos/Hans Peralta.png',
+      primary: '/images/retratos/hans-peralta-optimized.webp',
       alt: 'Retrato de Hans Peralta'
     },
     angelaRabanal: {
-      primary: '/images/Retratos/angela-rabanal-optimized.webp',
-      fallback: '/images/Retratos/Angela Rabanal.png',
+      primary: '/images/retratos/angela-rabanal-optimized.webp',
       alt: 'Retrato de Angela Rabanal'
     },
     elisaEcheverria: {
-      primary: '/images/Retratos/elisa-echeverria-optimized.webp',
-      fallback: '/images/Retratos/Elisa Echeverría.png',
+      primary: '/images/retratos/elisa-echeverria-optimized.webp',
       alt: 'Retrato de Elisa Echeverría'
     },
     adrianCortes: {
-      primary: '/images/Retratos/adrian-cortes-optimized.webp',
-      fallback: '/images/Retratos/Adrián Cortes.png',
+      primary: '/images/retratos/adrian-cortes-optimized.webp',
       alt: 'Retrato de Adrián Cortés'
     }
   },
   
   carousel: {
     main: {
-      primary: '/images/carousel/main.jpg',
-      fallback: '/images/carousel/main.webp',
+      primary: '/images/carousel/main.webp',
+      fallback: '/images/carousel/main.jpg',
       alt: 'Imagen principal del carrusel - Biblioteca comunitaria',
       width: 1200,
       height: 600
@@ -149,8 +145,8 @@ export const images = {
 
   about: {
     librero: {
-      primary: '/images/librero.webp',
-      fallback: '/images/librero.jpg',
+      primary: '/images/proyectos/librero.webp',
+      fallback: '/images/proyectos/librero.jpg',
       alt: 'Un librero de madera lleno de libros infantiles y novelas gráficas coloridas'
     }
   }
