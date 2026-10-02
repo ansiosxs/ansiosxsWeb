@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { BookHeart, Library, Truck, Palette, HeartHandshake as Handshake, CheckCircle, Star } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { images } from '@/data/images';
 import ImageWithFallback from '@/components/ui/image-with-fallback';
 
@@ -198,6 +198,13 @@ const Projects = () => {
           <p className="text-brand-text/80 leading-relaxed mb-4">
             Desde 2023, Insectaria ha albergado actividades como el Club Andrómeda de constelaciones narrativas, el Laboratorio de fanzines, talleres de cerámica y dibujo, y capacitaciones para el estudiantado del Liceo Balmaceda.
           </p>
+          <Link
+            to="/biblioteca"
+            className="sticker-button inline-flex items-center px-5 py-2.5 bg-brand-blue text-brand-text font-bold hover:bg-brand-purple hover:text-white"
+          >
+            <Library className="h-5 w-5 mr-2" />
+            Gestionar Inventario de la Biblioteca
+          </Link>
         </ProjectSection>
 
         <ProjectSection id="bibliomovil" icon={Truck} color="brand-yellow" title="Bibliomóvil" imageAlt="Un bibliomóvil colorido estacionado en una caleta costera, con gente leyendo libros al aire libre" imageUrl={images.projects.bibliomovil.primary} fallbackUrl={images.projects.bibliomovil.fallback}>

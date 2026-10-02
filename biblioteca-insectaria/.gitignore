@@ -1,0 +1,29 @@
+# Dependencias (se instalan con composer install / npm install)
+/vendor/
+/node_modules/
+
+# Variables de entorno: NUNCA subir. Contiene APP_KEY.
+/.env
+/.env.backup
+/.env.production
+
+# Base de datos local con el inventario real
+/database/*.sqlite
+/database/*.sqlite-journal
+/database/*.db
+
+# Archivos generados en runtime
+/storage/logs/*
+!/storage/logs/.gitignore
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/app/public/*
+!/storage/app/public/.gitignore
+/bootstrap/cache/*.php
+
+# Sistema y editores
+.DS_Store
+.idea/
+.vscode/
+*.swp

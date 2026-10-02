@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/components/ui/use-toast';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +17,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
 
   const isHomePage = location.pathname === '/';
 
@@ -42,7 +46,20 @@ const Navbar = () => {
     },
     { name: 'Como colaborar', path: '/como-colaborar' },
     { name: 'Contacto', path: '/contact' },
+    { name: 'Biblioteca', path: '/biblioteca' },
   ];
+
+  const handleLogout = async () => {
+    await logout();
+    setIsOpen(false);
+    toast({
+      title: 'Sesión cerrada',
+      description: 'Has cerrado sesión en la Biblioteca Insectaria.',
+    });
+    if (location.pathname.startsWith('/biblioteca')) {
+      navigate('/');
+    }
+  };
 
   const handleSubmenuClick = (e, path) => {
     e.preventDefault();
@@ -130,6 +147,25 @@ const Navbar = () => {
                 </Link>
               )
             )}
+
+            {user && (
+              <div className="flex items-center gap-3 pl-2 border-l border-brand-text/20">
+                <span
+                  className={`flex items-center gap-1.5 text-sm font-medium ${linkColor}`}
+                  title={user.email}
+                >
+                  <User className="h-4 w-4" />
+                  <span className="max-w-[10rem] truncate">{user.name}</span>
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className={`flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 ${hoverColor}`}
+                >
+                  <LogOut className="h-4 w-4" />
+                  Salir
+                </button>
+              </div>
+            )}
           </div>
 
           <Button
@@ -176,6 +212,22 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
+
+              {user && (
+                <div className="pt-3 mt-3 border-t border-brand-purple/20">
+                  <div className="flex items-center gap-2 px-3 py-2 text-sm text-brand-text/70">
+                    <User className="h-4 w-4" />
+                    <span className="truncate">{user.name}</span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-2 px-3 py-2 rounded-md font-medium text-brand-text hover:text-brand-pink hover:bg-brand-pink/10 transition-colors duration-200"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Cerrar sesión
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}
