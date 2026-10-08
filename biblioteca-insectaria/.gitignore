@@ -27,3 +27,6 @@
 .idea/
 .vscode/
 *.swp
+
+# Vite HMR (contiene URL local del frontend)
+/public/hot
