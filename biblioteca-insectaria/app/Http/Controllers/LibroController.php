@@ -60,7 +60,9 @@ class LibroController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $libro = Libro::with('ejemplares')->findOrFail($id);
+
+        return view('libros.show', compact('libro'));
     }
 
     /**
@@ -106,7 +108,13 @@ class LibroController extends Controller
     {
         // CORRECCIÓN: Buscar el libro antes de eliminarlo
         $libro = Libro::findOrFail($id);
-        
+
+        // No se permite eliminar un libro que tenga ejemplares físicos asociados
+        if ($libro->ejemplares()->count() > 0) {
+            return redirect()->route('libros.index')
+                             ->with('error', 'No se puede eliminar el libro "' . $libro->titulo . '" porque tiene ' . $libro->ejemplares()->count() . ' ejemplar(es) físico(s) asociados. Elimine los ejemplares primero.');
+        }
+
         $libro->delete();
 
         return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');

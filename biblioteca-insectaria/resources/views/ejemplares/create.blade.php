@@ -115,13 +115,71 @@
         </div>
     </div>
 
-    <!-- Script Event Listener para Autofocus Permanente del Escáner HID -->
+    <!-- Script Event Listener para el Escáner HID (Autofocus + Interceptación de ráfaga y Enter) -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const inputCodigo = document.getElementById('codigo_barras');
-            if(inputCodigo) {
-                inputCodigo.focus();
+            const form = inputCodigo ? inputCodigo.closest('form') : null;
+
+            if (!inputCodigo || !form) {
+                return;
             }
+
+            // Mantener el foco automático reactivo en el campo del escáner
+            inputCodigo.addEventListener('blur', function () {
+                // Restaurar el foco cuando el usuario no está interactuando manualmente
+                if (!escaneando) {
+                    setTimeout(function () { inputCodigo.focus(); }, 100);
+                }
+            });
+
+            // Variables para reconstruir la ráfaga de datos del escáner HID
+            let buffer = '';
+            let ultimaTecla = 0;
+            let escaneando = false;
+
+            inputCodigo.addEventListener('keydown', function (e) {
+                // Detectar la ráfaga rápida del escáner: teclas con intervalo < 20ms
+                const ahora = Date.now();
+                if (ahora - ultimaTecla < 20 && e.key !== 'Backspace' && e.key !== 'Delete') {
+                    escaneando = true;
+                }
+                ultimaTecla = ahora;
+
+                // El escáner envía un Enter automático al terminar de escanear
+                if (e.key === 'Enter') {
+                    if (escaneando) {
+                        // Prevenir el submit prematuro del formulario
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        // Limpiar el buffer y enfocar el campo para la siguiente lectura
+                        buffer = '';
+                        escaneando = false;
+                        inputCodigo.focus();
+                        return;
+                    }
+                    // Si no es un escaneo, permitir el submit normal
+                }
+            });
+
+            inputCodigo.addEventListener('input', function () {
+                // Durante la ráfaga del escáner, no permitir edición manual
+                if (escaneando) {
+                    buffer = inputCodigo.value;
+                }
+            });
+
+            // Validación frontend: impedir envío si el código ya fue escaneado previamente
+            form.addEventListener('submit', function (e) {
+                const codigo = inputCodigo.value.trim();
+                if (codigo === '') {
+                    e.preventDefault();
+                    alert('Debes ingresar o escanear un código de barras.');
+                    inputCodigo.focus();
+                    return;
+                }
+            });
         });
     </script>
 </x-app-layout>
