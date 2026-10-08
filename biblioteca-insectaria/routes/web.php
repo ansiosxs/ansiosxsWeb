@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\EjemplarController;
+use App\Http\Controllers\SocioController;
+use App\Http\Controllers\PrestamoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,4 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/libros/{libro}/ejemplares', [EjemplarController::class, 'create'])->name('libros.ejemplares.create');
     Route::post('/libros/{libro}/ejemplares', [EjemplarController::class, 'store'])->name('libros.ejemplares.store');
     Route::delete('/ejemplares/{ejemplar}', [EjemplarController::class, 'destroy'])->name('ejemplares.destroy');
+    Route::resource('socios', SocioController::class);
+    Route::resource('prestamos', PrestamoController::class);
 });
