@@ -104,9 +104,13 @@ class LibroController extends Controller
      */
     public function destroy(string $id)
     {
-        // CORRECCIÓN: Buscar el libro antes de eliminarlo
         $libro = Libro::findOrFail($id);
-        
+
+        if ($libro->ejemplares()->whereHas('prestamos')->exists()) {
+            return redirect()->route('libros.index')
+                ->with('error', 'No se puede eliminar este libro porque sus ejemplares tienen préstamos asociados.');
+        }
+
         $libro->delete();
 
         return redirect()->route('libros.index')->with('success', 'Libro eliminado con éxito.');

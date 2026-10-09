@@ -32,5 +32,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/libros/{libro}/ejemplares', [EjemplarController::class, 'store'])->name('libros.ejemplares.store');
     Route::delete('/ejemplares/{ejemplar}', [EjemplarController::class, 'destroy'])->name('ejemplares.destroy');
     Route::resource('socios', SocioController::class);
-    Route::resource('prestamos', PrestamoController::class);
+    Route::resource('prestamos', PrestamoController::class)->only(['index', 'create', 'store', 'update']);
 });

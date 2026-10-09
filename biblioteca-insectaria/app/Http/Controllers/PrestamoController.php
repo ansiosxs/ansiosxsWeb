@@ -6,6 +6,8 @@ use App\Models\Prestamo;
 use App\Models\Socio;
 use App\Models\Ejemplar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class PrestamoController extends Controller
 {
@@ -14,7 +16,17 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos = Prestamo::with(['socio', 'ejemplar'])->latest()->paginate(10);
+        Ejemplar::where('disponibilidad', 'Prestado')
+            ->whereDoesntHave('prestamos', function ($query) {
+                $query->whereIn('estado', ['Prestado', 'Atrasado']);
+            })
+            ->update(['disponibilidad' => 'Disponible']);
+
+        Prestamo::where('estado', 'Prestado')
+            ->whereDate('fecha_devolucion_esperada', '<', now()->toDateString())
+            ->update(['estado' => 'Atrasado']);
+
+        $prestamos = Prestamo::with(['socio', 'ejemplar.libro'])->latest()->paginate(10);
         return view('prestamos.index', compact('prestamos'));
     }
 
@@ -24,7 +36,9 @@ class PrestamoController extends Controller
     public function create()
     {
         $socios = Socio::where('estado', 'Activo')->get();
-        $ejemplares = Ejemplar::all(); // Puedes filtrar si tienes un campo de estado/disponible
+        $ejemplares = Ejemplar::with('libro')
+            ->where('disponibilidad', 'Disponible')
+            ->get();
 
         return view('prestamos.create', compact('socios', 'ejemplares'));
     }
@@ -34,33 +48,38 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
-                'socio_id'                  => 'required|exists:socios,id',
-                'ejemplar_id'               => 'required|exists:ejemplares,id',
-                'fecha_prestamo'            => 'required|date',
-                'fecha_devolucion_esperada' => 'required|date|after_or_equal:fecha_prestamo',
-                'estado'                    => 'required|in:En Cursada,Devuelto,Atrasado',
-            ], [
-                'socio_id.required'                  => 'Debes seleccionar un socio.',
-                'socio_id.exists'                    => 'El socio seleccionado no existe.',
-                'ejemplar_id.required'               => 'Debes seleccionar un ejemplar.',
-                'ejemplar_id.exists'                  => 'El ejemplar seleccionado no existe.',
-                'fecha_prestamo.required'            => 'La fecha de préstamo es obligatoria.',
-                'fecha_devolucion_esperada.required' => 'La fecha esperada de devolución es obligatoria.',
-                'fecha_devolucion_esperada.after_or_equal' => 'La fecha esperada debe ser posterior o igual a la fecha de préstamo.',
-            ]);
+        $request->validate([
+            'socio_id'                  => ['required', Rule::exists('socios', 'id')->where('estado', 'Activo')],
+            'ejemplar_id'               => 'required|exists:ejemplares,id',
+            'fecha_prestamo'            => 'required|date',
+            'fecha_devolucion_esperada' => 'required|date|after_or_equal:fecha_prestamo',
+        ]);
+
+        $created = DB::transaction(function () use ($request) {
+            $claimed = Ejemplar::whereKey($request->ejemplar_id)
+                ->where('disponibilidad', 'Disponible')
+                ->update(['disponibilidad' => 'Prestado']);
+
+            if ($claimed !== 1) {
+                return false;
+            }
 
             Prestamo::create([
                 'socio_id'                  => $request->socio_id,
                 'ejemplar_id'               => $request->ejemplar_id,
                 'fecha_prestamo'            => $request->fecha_prestamo,
                 'fecha_devolucion_esperada' => $request->fecha_devolucion_esperada,
-                'fecha_devolucion_real'     => $request->fecha_devolucion_real ?? null,
-                'estado'                    => $request->estado ?? 'En Cursada',
+                'estado'                    => 'Prestado',
             ]);
 
-            return redirect()->route('prestamos.index')->with('success', '¡Préstamo registrado exitosamente!');
+            return true;
+        });
+
+        if (! $created) {
+            return redirect()->back()->with('error', 'El ejemplar seleccionado ya se encuentra prestado.')->withInput();
         }
+
+        return redirect()->route('prestamos.index')->with('success', '¡Préstamo registrado correctamente!');
     }
 
     /**
@@ -84,7 +103,33 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $returned = DB::transaction(function () use ($id) {
+            $prestamo = Prestamo::findOrFail($id);
+
+            $updated = Prestamo::whereKey($prestamo->id)
+                ->whereIn('estado', ['Prestado', 'Atrasado'])
+                ->update([
+                    'estado' => 'Devuelto',
+                    'fecha_devolucion_real' => now()->toDateString(),
+                ]);
+
+            if ($updated !== 1) {
+                return false;
+            }
+
+            Ejemplar::whereKey($prestamo->ejemplar_id)
+                ->where('disponibilidad', 'Prestado')
+                ->update(['disponibilidad' => 'Disponible']);
+
+            return true;
+        });
+
+        if (! $returned) {
+            return redirect()->route('prestamos.index')
+                ->with('error', 'Este préstamo ya no está activo y no se puede registrar otra devolución.');
+        }
+
+        return redirect()->route('prestamos.index')->with('success', '¡Devolución registrada y ejemplar liberado!');
     }
 
     /**

@@ -20,4 +20,9 @@ class Ejemplar extends Model
     {
         return $this->belongsTo(Libro::class);
     }
+
+    public function prestamos()
+    {
+        return $this->hasMany(Prestamo::class);
+    }
 }

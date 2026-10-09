@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('fecha_prestamo');
             $table->date('fecha_devolucion_esperada');
             $table->date('fecha_devolucion_real')->nullable();
-            $table->enum('estado', ['En Cursada', 'Devuelto', 'Atrasado'])->default('En Cursada');
+            $table->enum('estado', ['Prestado', 'Devuelto', 'Atrasado'])->default('Prestado');
         
             $table->timestamps();
         });

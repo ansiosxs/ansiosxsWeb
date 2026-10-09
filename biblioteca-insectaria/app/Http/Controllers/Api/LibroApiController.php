@@ -59,6 +59,12 @@ class LibroApiController extends Controller
 
     public function destroy(Libro $libro): JsonResponse
     {
+        if ($libro->ejemplares()->whereHas('prestamos')->exists()) {
+            return response()->json([
+                'message' => 'No se puede eliminar este libro porque sus ejemplares tienen préstamos asociados.',
+            ], 409);
+        }
+
         $libro->delete();
 
         return response()->json(null, 204);
