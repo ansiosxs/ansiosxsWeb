@@ -19,6 +19,18 @@
                     <x-nav-link :href="route('libros.index')" :active="request()->routeIs('libros.*')">
                         {{ __('Libros') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('socios.index')" :active="request()->routeIs('socios.*')">
+                        {{ __('Socios') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('prestamos.index')" :active="request()->routeIs('prestamos.*')">
+                        {{ __('Préstamos') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('morosidad.index')" :active="request()->routeIs('morosidad.*')">
+                        {{ __('Morosidad') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -40,6 +52,10 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('prestamos.recordatorios')">
+                            {{ __('Recordatorios') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -78,6 +94,18 @@
             <x-responsive-nav-link :href="route('libros.index')" :active="request()->routeIs('libros.*')">
                 {{ __('Libros') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('socios.index')" :active="request()->routeIs('socios.*')">
+                {{ __('Socios') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('prestamos.index')" :active="request()->routeIs('prestamos.*')">
+                {{ __('Préstamos') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('morosidad.index')" :active="request()->routeIs('morosidad.*')">
+                {{ __('Morosidad') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -90,6 +118,10 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('prestamos.recordatorios')">
+                    {{ __('Recordatorios') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

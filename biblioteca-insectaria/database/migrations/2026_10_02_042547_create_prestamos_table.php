@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
-        
+
             // Llaves foráneas
             $table->foreignId('socio_id')->constrained('socios')->onDelete('cascade');
             $table->foreignId('ejemplar_id')->constrained('ejemplares')->onDelete('cascade');
-        
+
             // Fechas de control transaccional
             $table->date('fecha_prestamo');
             $table->date('fecha_devolucion_esperada');
             $table->date('fecha_devolucion_real')->nullable();
             $table->enum('estado', ['En Cursada', 'Devuelto', 'Atrasado'])->default('En Cursada');
-        
+
             $table->timestamps();
         });
     }

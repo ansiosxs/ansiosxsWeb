@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Libro;
+use Illuminate\Http\Request;
 
 class LibroController extends Controller
 {
@@ -33,14 +33,14 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo'  => 'required|string|min:2|max:255',
-            'autor'   => 'required|string|min:2|max:255',
+            'titulo' => 'required|string|min:2|max:255',
+            'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
         ], [
-            'titulo.required'  => 'El título del libro es obligatorio.',
-            'titulo.min'       => 'El título debe tener al menos 2 caracteres.',
-            'autor.required'   => 'El nombre del autor es obligatorio.',
-            'autor.min'        => 'El autor debe tener al menos 2 caracteres.',
+            'titulo.required' => 'El título del libro es obligatorio.',
+            'titulo.min' => 'El título debe tener al menos 2 caracteres.',
+            'autor.required' => 'El nombre del autor es obligatorio.',
+            'autor.min' => 'El autor debe tener al menos 2 caracteres.',
             'seccion.required' => 'La sección o estante es obligatoria.',
         ]);
 
@@ -83,8 +83,8 @@ class LibroController extends Controller
     {
         // 1. Validar
         $request->validate([
-            'titulo'  => 'required|string|min:2|max:255',
-            'autor'   => 'required|string|min:2|max:255',
+            'titulo' => 'required|string|min:2|max:255',
+            'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
         ]);
 
@@ -93,8 +93,8 @@ class LibroController extends Controller
 
         // 3. Actualizar
         $libro->update([
-            'titulo'  => $request->titulo,
-            'autor'   => $request->autor,
+            'titulo' => $request->titulo,
+            'autor' => $request->autor,
             'seccion' => $request->seccion,
         ]);
 
@@ -112,7 +112,7 @@ class LibroController extends Controller
         // No se permite eliminar un libro que tenga ejemplares físicos asociados
         if ($libro->ejemplares()->count() > 0) {
             return redirect()->route('libros.index')
-                             ->with('error', 'No se puede eliminar el libro "' . $libro->titulo . '" porque tiene ' . $libro->ejemplares()->count() . ' ejemplar(es) físico(s) asociados. Elimine los ejemplares primero.');
+                ->with('error', 'No se puede eliminar el libro "'.$libro->titulo.'" porque tiene '.$libro->ejemplares()->count().' ejemplar(es) físico(s) asociados. Elimine los ejemplares primero.');
         }
 
         $libro->delete();

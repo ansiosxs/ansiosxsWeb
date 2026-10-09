@@ -21,23 +21,23 @@ class EjemplarController extends Controller
     public function store(Request $request, Libro $libro)
     {
         $request->validate([
-            'codigo_barras'  => 'required|string|unique:ejemplares,codigo_barras|max:50',
-            'estado_fisico'  => 'required|string|max:50',
+            'codigo_barras' => 'required|string|unique:ejemplares,codigo_barras|max:50',
+            'estado_fisico' => 'required|string|max:50',
             'disponibilidad' => 'required|string|max:50',
         ], [
             'codigo_barras.required' => 'Debes ingresar o escanear un código de barras.',
-            'codigo_barras.unique'   => 'Este código de barras ya está asignado a otro ejemplar.',
+            'codigo_barras.unique' => 'Este código de barras ya está asignado a otro ejemplar.',
         ]);
 
         Ejemplar::create([
-            'libro_id'       => $libro->id,
-            'codigo_barras'  => $request->codigo_barras,
-            'estado_fisico'  => $request->estado_fisico,
+            'libro_id' => $libro->id,
+            'codigo_barras' => $request->codigo_barras,
+            'estado_fisico' => $request->estado_fisico,
             'disponibilidad' => $request->disponibilidad,
         ]);
 
         return redirect()->route('libros.ejemplares.create', $libro->id)
-                         ->with('success', '¡Ejemplar escaneado y registrado con éxito!');
+            ->with('success', '¡Ejemplar escaneado y registrado con éxito!');
     }
 
     // Eliminar una copia física
@@ -47,6 +47,6 @@ class EjemplarController extends Controller
         $ejemplar->delete();
 
         return redirect()->route('libros.ejemplares.create', $libroId)
-                         ->with('success', '¡Ejemplar eliminado correctamente!');
+            ->with('success', '¡Ejemplar eliminado correctamente!');
     }
 }

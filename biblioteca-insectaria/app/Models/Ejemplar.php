@@ -15,9 +15,32 @@ class Ejemplar extends Model
         'disponibilidad',
     ];
 
-    // Un ejemplar pertenece a un libro
+    protected $casts = [
+        'disponibilidad' => 'string',
+    ];
+
     public function libro()
     {
         return $this->belongsTo(Libro::class);
+    }
+
+    public function prestamoActivo()
+    {
+        return $this->hasOne(Prestamo::class)->where('estado', 'En Cursada');
+    }
+
+    public function estaDisponible(): bool
+    {
+        return $this->disponibilidad === 'Disponible';
+    }
+
+    public function marcarComoPrestado(): void
+    {
+        $this->update(['disponibilidad' => 'Prestado']);
+    }
+
+    public function marcarComoDisponible(): void
+    {
+        $this->update(['disponibilidad' => 'Disponible']);
     }
 }
