@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Libro;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LibroApiController extends Controller
 {
@@ -24,10 +25,9 @@ class LibroApiController extends Controller
             'titulo' => 'required|string|min:2|max:255',
             'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
-            'cantidad' => 'required|integer|min:0',
+            'cantidad' => ['sometimes', 'integer', Rule::in([0])],
         ], [
-            'cantidad.integer' => 'La cantidad de ejemplares debe ser un número entero.',
-            'cantidad.min' => 'La cantidad de ejemplares no puede ser negativa.',
+            'cantidad.in' => 'La cantidad debe ser cero al crear el libro; registre los ejemplares físicos por separado.',
         ]);
 
         $libro = Libro::create($validated);
@@ -46,10 +46,9 @@ class LibroApiController extends Controller
             'titulo' => 'required|string|min:2|max:255',
             'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
-            'cantidad' => 'required|integer|min:0',
+            'cantidad' => ['sometimes', 'integer', Rule::in([$libro->cantidad])],
         ], [
-            'cantidad.integer' => 'La cantidad de ejemplares debe ser un número entero.',
-            'cantidad.min' => 'La cantidad de ejemplares no puede ser negativa.',
+            'cantidad.in' => 'La cantidad se calcula con los ejemplares físicos y no se puede modificar desde esta API.',
         ]);
 
         $libro->update($validated);
@@ -59,9 +58,9 @@ class LibroApiController extends Controller
 
     public function destroy(Libro $libro): JsonResponse
     {
-        if ($libro->ejemplares()->whereHas('prestamos')->exists()) {
+        if ($libro->ejemplares()->exists()) {
             return response()->json([
-                'message' => 'No se puede eliminar este libro porque sus ejemplares tienen préstamos asociados.',
+                'message' => 'No se puede eliminar este libro mientras tenga ejemplares físicos asociados.',
             ], 409);
         }
 

@@ -28,6 +28,17 @@
                     </a>
                 </div>
 
+                <form method="GET" action="{{ route('prestamos.index') }}" class="mb-4 flex gap-2">
+                    <input type="search" name="search" value="{{ request('search') }}" placeholder="Buscar socio, RUT o título" class="border-gray-300 rounded-md">
+                    <select name="estado" class="border-gray-300 rounded-md">
+                        <option value="">Todos los estados</option>
+                        @foreach (['Prestado', 'Atrasado', 'Devuelto'] as $estado)
+                            <option value="{{ $estado }}" @selected(request('estado') === $estado)>{{ $estado }}</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Filtrar</button>
+                </form>
+
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 border border-gray-200">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
@@ -69,6 +80,7 @@
                                     </td>
 
                                     <td class="py-2 px-4 text-center">
+                                        <a href="{{ route('prestamos.show', $prestamo) }}" class="text-blue-600 hover:underline mr-2">Detalle</a>
                                         @if (in_array($prestamo->estado, ['Prestado', 'Atrasado'], true))
                                             <form action="{{ route('prestamos.update', $prestamo->id) }}" method="POST" onsubmit="return confirm('¿Confirmar devolución de este ejemplar?');">
                                                 @csrf
@@ -91,6 +103,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-4">
+                    {{ $prestamos->links() }}
                 </div>
 
             </div>

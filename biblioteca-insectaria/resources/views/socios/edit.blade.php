@@ -26,8 +26,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block font-medium text-sm text-gray-700">RUT</label>
-                            <input type="text" name="rut" value="{{ old('rut', $socio->rut) }}" placeholder="12345678-5" maxlength="12" required class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
-                            <p class="mt-1 text-xs text-gray-500">Formato: 12345678-5. También puedes ingresarlo con puntos.</p>
+                            <input type="text" name="rut" value="{{ old('rut', $socio->rut) }}" placeholder="12345678-5" maxlength="10" pattern="[0-9]{7,8}-[0-9Kk]" title="Ingresa el RUT sin puntos y con guion, por ejemplo 12345678-5." required class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                            <p class="mt-1 text-xs text-gray-500">Formato obligatorio: sin puntos y con guion (ej. 12345678-5).</p>
                         </div>
 
                         <div>
@@ -48,6 +48,11 @@
                         <div>
                             <label class="block font-medium text-sm text-gray-700">Comuna</label>
                             <input type="text" name="comuna" value="{{ old('comuna', $socio->comuna) }}" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                        </div>
+
+                        <div>
+                            <label class="block font-medium text-sm text-gray-700">Ocupación</label>
+                            <input type="text" name="ocupacion" value="{{ old('ocupacion', $socio->ocupacion) }}" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
                         </div>
 
                         <div>

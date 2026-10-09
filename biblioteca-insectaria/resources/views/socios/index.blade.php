@@ -26,6 +26,11 @@
                     </div>
                 @endif
 
+                <form method="GET" action="{{ route('socios.index') }}" class="mb-4">
+                    <input type="search" name="search" value="{{ request('search') }}" placeholder="Buscar por nombre, RUT o email" class="border-gray-300 rounded-md">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Buscar</button>
+                </form>
+
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-200">
                         <thead>
@@ -35,6 +40,7 @@
                                 <th class="py-2 px-4 border-r text-left">Email</th>
                                 <th class="py-2 px-4 border-r text-left">Teléfono</th>
                                 <th class="py-2 px-4 border-r text-left">Comuna</th>
+                                <th class="py-2 px-4 border-r text-left">Ocupación</th>
                                 <th class="py-2 px-4 border-r text-left">Estado</th>
                                 <th class="py-2 px-4 text-center">Acciones</th>
                             </tr>
@@ -47,6 +53,7 @@
                                     <td class="py-2 px-4 border-r">{{ $socio->email ?? '-' }}</td>
                                     <td class="py-2 px-4 border-r">{{ $socio->telefono ?? '-' }}</td>
                                     <td class="py-2 px-4 border-r">{{ $socio->comuna }}</td>
+                                    <td class="py-2 px-4 border-r">{{ $socio->ocupacion ?? '-' }}</td>
                                     <td class="py-2 px-4 border-r">
                                         <span class="px-2 py-1 text-xs rounded font-semibold
                                             {{ $socio->estado === 'Activo' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800' }}">
@@ -54,6 +61,7 @@
                                         </span>
                                     </td>
                                     <td class="py-2 px-4 text-center flex justify-center gap-2">
+                                        <a href="{{ route('socios.show', $socio) }}" class="text-green-600 hover:underline">Ver</a>
                                         <a href="{{ route('socios.edit', $socio->id) }}" class="text-blue-600 hover:underline">Editar</a>
     
                                         <form action="{{ route('socios.destroy', $socio->id) }}" method="POST" onsubmit="return confirm('¿Seguro que deseas eliminar este socio?');">
@@ -65,7 +73,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center py-4 text-gray-500">
+                                    <td colspan="8" class="text-center py-4 text-gray-500">
                                         No hay socios registrados en el sistema actualmente.
                                     </td>
                                 </tr>

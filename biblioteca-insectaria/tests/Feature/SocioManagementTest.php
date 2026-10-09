@@ -44,11 +44,11 @@ it('actualiza un socio y permite conservar su propio rut', function () {
     ]);
 });
 
-it('normaliza el rut, valida su dígito verificador y evita duplicados con formato distinto', function () {
+it('requiere el rut sin puntos y con guion al crear y valida su dígito verificador', function () {
     $this->actingAs(User::factory()->create());
 
     $this->post(route('socios.store'), [
-        'rut' => '12.345.678-5',
+        'rut' => '12345678-5',
         'nombre' => 'Socio con RUT normalizado',
         'estado' => 'Activo',
     ])->assertRedirect(route('socios.index'))
@@ -62,9 +62,38 @@ it('normaliza el rut, valida su dígito verificador y evita duplicados con forma
         'estado' => 'Activo',
     ])->assertSessionHasErrors('rut');
 
-    $this->from(route('socios.create'))->post(route('socios.store'), [
-        'rut' => '12345678-9',
-        'nombre' => 'RUT inválido',
+    foreach (['12.345.678-5', '123456785', '12345678-9'] as $rut) {
+        $this->from(route('socios.create'))->post(route('socios.store'), [
+            'rut' => $rut,
+            'nombre' => 'RUT inválido',
+            'estado' => 'Activo',
+        ])->assertSessionHasErrors('rut');
+    }
+});
+
+it('requires the rut format when editing a socio', function () {
+    $this->actingAs(User::factory()->create());
+    $socio = Socio::create([
+        'rut' => '12345678-5',
+        'nombre' => 'Socio de prueba',
         'estado' => 'Activo',
-    ])->assertSessionHasErrors('rut');
+    ]);
+
+    foreach (['12.345.678-5', '123456785', '12345678-9'] as $rut) {
+        $response = $this->from(route('socios.edit', $socio))->put(route('socios.update', $socio), [
+            'rut' => $rut,
+            'nombre' => 'Socio de prueba',
+            'estado' => 'Activo',
+        ]);
+
+        expect($response->getSession()->has('errors'))
+            ->toBeTrue("Expected invalid RUT {$rut} to fail validation.");
+    }
+
+    $this->put(route('socios.update', $socio), [
+        'rut' => '12345678-5',
+        'nombre' => 'Socio actualizado',
+        'estado' => 'Activo',
+    ])->assertRedirect(route('socios.index'))
+        ->assertSessionHas('success');
 });

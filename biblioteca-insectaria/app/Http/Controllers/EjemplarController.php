@@ -24,10 +24,10 @@ class EjemplarController extends Controller
         $request->validate([
             'codigo_barras'  => 'required|string|unique:ejemplares,codigo_barras|max:50',
             'estado_fisico'  => 'required|string|max:50',
-            'disponibilidad' => 'required|in:Disponible,En Mantención',
+            'disponibilidad' => 'required|in:Disponible,En Mantención,Mantenimiento,Extraviado',
         ], [
             'codigo_barras.required' => 'Debes ingresar o escanear un código de barras.',
-            'codigo_barras.unique'   => 'Este código de barras ya está asignado a otro ejemplar.',
+            'codigo_barras.unique' => 'Este código de barras ya está asignado a otro ejemplar.',
         ]);
 
         DB::transaction(function () use ($request, $libro) {
@@ -41,7 +41,7 @@ class EjemplarController extends Controller
         });
 
         return redirect()->route('libros.ejemplares.create', $libro->id)
-                         ->with('success', '¡Ejemplar escaneado y registrado con éxito!');
+            ->with('success', '¡Ejemplar escaneado y registrado con éxito!');
     }
 
     // Eliminar una copia física
@@ -60,6 +60,6 @@ class EjemplarController extends Controller
         });
 
         return redirect()->route('libros.ejemplares.create', $libroId)
-                         ->with('success', '¡Ejemplar eliminado correctamente!');
+            ->with('success', '¡Ejemplar eliminado correctamente!');
     }
 }

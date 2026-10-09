@@ -2,11 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Prestamo extends Model
 {
+    public const ACTIVE_STATUSES = ['Prestado', 'Atrasado', 'En Cursada'];
+
+    protected function casts(): array
+    {
+        return [
+            'fecha_prestamo' => 'date',
+            'fecha_devolucion_esperada' => 'date',
+            'fecha_devolucion_real' => 'date',
+        ];
+    }
+
     protected $fillable = [
         'socio_id',
         'ejemplar_id',

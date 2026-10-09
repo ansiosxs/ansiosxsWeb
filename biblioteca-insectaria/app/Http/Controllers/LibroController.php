@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Libro;
+use Illuminate\Http\Request;
 
 class LibroController extends Controller
 {
@@ -33,14 +33,14 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titulo'  => 'required|string|min:2|max:255',
-            'autor'   => 'required|string|min:2|max:255',
+            'titulo' => 'required|string|min:2|max:255',
+            'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
         ], [
-            'titulo.required'  => 'El título del libro es obligatorio.',
-            'titulo.min'       => 'El título debe tener al menos 2 caracteres.',
-            'autor.required'   => 'El nombre del autor es obligatorio.',
-            'autor.min'        => 'El autor debe tener al menos 2 caracteres.',
+            'titulo.required' => 'El título del libro es obligatorio.',
+            'titulo.min' => 'El título debe tener al menos 2 caracteres.',
+            'autor.required' => 'El nombre del autor es obligatorio.',
+            'autor.min' => 'El autor debe tener al menos 2 caracteres.',
             'seccion.required' => 'La sección o estante es obligatoria.',
         ]);
 
@@ -60,7 +60,9 @@ class LibroController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $libro = Libro::with('ejemplares')->findOrFail($id);
+
+        return view('libros.show', compact('libro'));
     }
 
     /**
@@ -81,8 +83,8 @@ class LibroController extends Controller
     {
         // 1. Validar
         $request->validate([
-            'titulo'  => 'required|string|min:2|max:255',
-            'autor'   => 'required|string|min:2|max:255',
+            'titulo' => 'required|string|min:2|max:255',
+            'autor' => 'required|string|min:2|max:255',
             'seccion' => 'required|string|max:100',
         ]);
 
@@ -91,8 +93,8 @@ class LibroController extends Controller
 
         // 3. Actualizar
         $libro->update([
-            'titulo'  => $request->titulo,
-            'autor'   => $request->autor,
+            'titulo' => $request->titulo,
+            'autor' => $request->autor,
             'seccion' => $request->seccion,
         ]);
 
@@ -106,9 +108,9 @@ class LibroController extends Controller
     {
         $libro = Libro::findOrFail($id);
 
-        if ($libro->ejemplares()->whereHas('prestamos')->exists()) {
+        if ($libro->ejemplares()->exists()) {
             return redirect()->route('libros.index')
-                ->with('error', 'No se puede eliminar este libro porque sus ejemplares tienen préstamos asociados.');
+                ->with('error', 'No se puede eliminar este libro mientras tenga ejemplares físicos asociados. Elimine primero los ejemplares que no tengan préstamos registrados.');
         }
 
         $libro->delete();

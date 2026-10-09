@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class SocioUpdateRequest extends FormRequest
+{
+    protected function prepareForValidation(): void
+    {
+        $rut = $this->input('rut');
+        if (is_string($rut)) {
+            $this->merge(['rut' => strtoupper($rut)]);
+        }
+    }
+
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        $socioId = $this->route('socio')?->id ?? $this->route('id');
+        $rutRequirement = $this->isMethod('PUT') ? 'required' : 'sometimes';
+
+        return [
+            'rut' => [$rutRequirement, 'string', 'max:10', 'unique:socios,rut,'.$socioId, 'rut_chileno'],
+            'nombre' => 'sometimes|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'telefono' => 'nullable|string|max:20',
+            'comuna' => 'nullable|string|max:100',
+            'ocupacion' => 'nullable|string|max:100',
+            'estado' => 'sometimes|in:Activo,Moroso,Inactivo',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'rut.unique' => 'Este RUN/RUT ya se encuentra registrado.',
+            'rut.rut_chileno' => 'El RUN/RUT ingresado no tiene un formato válido.',
+            'nombre.required' => 'El nombre del socio es obligatorio.',
+            'email.email' => 'Ingresa un formato de correo electrónico válido.',
+        ];
+    }
+}

@@ -116,6 +116,38 @@ it('marca vencidos los préstamos atrasados y permite devolverlos una sola vez',
         ->assertSessionHas('error');
 });
 
+it('conserva préstamos antiguos como activos mientras la migración de estado está pendiente', function () {
+    $this->actingAs(User::factory()->create());
+    [$socio, , $ejemplar] = crearEjemplarDisponible();
+    $ejemplar->update(['disponibilidad' => 'Prestado']);
+    $prestamo = Prestamo::create([
+        'socio_id' => $socio->id,
+        'ejemplar_id' => $ejemplar->id,
+        'fecha_prestamo' => now()->toDateString(),
+        'fecha_devolucion_esperada' => now()->addDays(7)->toDateString(),
+        'estado' => 'En Cursada',
+    ]);
+
+    $this->get(route('prestamos.index'))->assertOk();
+
+    $this->assertDatabaseHas('ejemplares', [
+        'id' => $ejemplar->id,
+        'disponibilidad' => 'Prestado',
+    ]);
+
+    $this->post(route('prestamos.procesarDevolucion', $prestamo))
+        ->assertRedirect(route('prestamos.show', $prestamo));
+
+    $this->assertDatabaseHas('prestamos', [
+        'id' => $prestamo->id,
+        'estado' => 'Devuelto',
+    ]);
+    $this->assertDatabaseHas('ejemplares', [
+        'id' => $ejemplar->id,
+        'disponibilidad' => 'Disponible',
+    ]);
+});
+
 it('repara ejemplares atascados como prestados si todos sus préstamos ya fueron devueltos', function () {
     $this->actingAs(User::factory()->create());
     [$socio, , $ejemplar] = crearEjemplarDisponible();

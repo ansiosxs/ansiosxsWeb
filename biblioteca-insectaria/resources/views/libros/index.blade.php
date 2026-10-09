@@ -46,6 +46,7 @@
                                     <td class="py-2 px-4 border-r">{{ $libro->autor }}</td>
                                     <td class="py-2 px-4 border-r">{{ $libro->seccion ?? 'N/A' }}</td>
                                     <td class="py-2 px-4 text-center flex justify-center gap-2">
+                                        <a href="{{ route('libros.show', $libro->id) }}" class="text-gray-600 hover:underline">Ver</a>
                                         <a href="{{ route('libros.ejemplares.create', $libro->id) }}" class="text-green-600 hover:underline font-semibold">
                                             + Ejemplar
                                         </a>

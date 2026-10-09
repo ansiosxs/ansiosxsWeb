@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ejemplares', function (Blueprint $table) 
-        {
-        $table->id();
-        
-        // Llave foránea (El "hilo" que conecta con la tabla libros)
-        $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
-        
-        // Resto de los campos del diagrama
-        $table->string('codigo_barras', 50)->unique();
-        $table->string('estado_fisico');
-        $table->string('disponibilidad');
-        
-        $table->timestamps();
+        Schema::create('ejemplares', function (Blueprint $table) {
+            $table->id();
+
+            // Llave foránea (El "hilo" que conecta con la tabla libros)
+            $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
+
+            // Resto de los campos del diagrama
+            $table->string('codigo_barras', 50)->unique();
+            $table->string('estado_fisico');
+            $table->string('disponibilidad');
+
+            $table->timestamps();
         });
     }
 
