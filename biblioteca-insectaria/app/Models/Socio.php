@@ -16,20 +16,20 @@ class Socio extends Model
             set: function (string $value): string {
                 $normalized = strtoupper((string) preg_replace('/[.\-\s]/', '', trim($value)));
 
-                if (preg_match('/^\d{2,9}$/', $normalized) !== 1) {
+                if (preg_match('/^(\d{1,8})([\dK])$/', $normalized, $matches) !== 1) {
                     return $normalized;
                 }
 
-                return substr($normalized, 0, -1).'-'.substr($normalized, -1);
+                return $matches[1].'-'.$matches[2];
             },
             get: function (string $value): string {
                 $normalized = strtoupper((string) preg_replace('/[.\-\s]/', '', trim($value)));
 
-                if (preg_match('/^\d{2,9}$/', $normalized) !== 1) {
+                if (preg_match('/^(\d{1,8})([\dK])$/', $normalized, $matches) !== 1) {
                     return $value;
                 }
 
-                return substr($normalized, 0, -1).'-'.substr($normalized, -1);
+                return $matches[1].'-'.$matches[2];
             },
         );
     }
@@ -81,7 +81,7 @@ class Socio extends Model
                     return 0;
                 }
 
-                return $prestamos->max(fn ($p) => $p->fecha_devolucion_esperada->diffInDays(now()));
+                return $prestamos->max(fn ($p) => $p->fecha_devolucion_esperada->diffInDays(today()));
             },
         );
     }

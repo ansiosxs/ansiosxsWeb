@@ -5,6 +5,7 @@ use App\Models\Libro;
 use App\Models\Prestamo;
 use App\Models\Socio;
 use App\Models\User;
+use Carbon\Carbon;
 
 function crearEjemplarDisponible(): array
 {
@@ -101,6 +102,10 @@ it('marca vencidos los préstamos atrasados y permite devolverlos una sola vez',
         'id' => $prestamo->id,
         'estado' => 'Atrasado',
     ]);
+    $this->assertDatabaseHas('socios', [
+        'id' => $socio->id,
+        'estado' => 'Moroso',
+    ]);
 
     $this->put(route('prestamos.update', $prestamo))->assertRedirect(route('prestamos.index'));
     $this->assertDatabaseHas('prestamos', [
@@ -114,6 +119,38 @@ it('marca vencidos los préstamos atrasados y permite devolverlos una sola vez',
 
     $this->put(route('prestamos.update', $prestamo))
         ->assertSessionHas('error');
+});
+
+it('sincroniza la morosidad y calcula el atraso en días calendario enteros', function () {
+    $this->actingAs(User::factory()->create());
+    $this->travelTo(Carbon::parse('2026-10-09 17:47:24'));
+    [$socio, , $ejemplar] = crearEjemplarDisponible();
+    $ejemplar->update(['disponibilidad' => 'Prestado']);
+    $prestamo = Prestamo::create([
+        'socio_id' => $socio->id,
+        'ejemplar_id' => $ejemplar->id,
+        'fecha_prestamo' => now()->subDays(38)->toDateString(),
+        'fecha_devolucion_esperada' => now()->subDays(28)->toDateString(),
+        'estado' => 'Prestado',
+    ]);
+
+    $this->get(route('morosidad.index'))
+        ->assertOk()
+        ->assertSee('Socio de prueba')
+        ->assertSee('28 día(s)');
+
+    $this->assertDatabaseHas('prestamos', [
+        'id' => $prestamo->id,
+        'estado' => 'Atrasado',
+    ]);
+    $this->assertDatabaseHas('socios', [
+        'id' => $socio->id,
+        'estado' => 'Moroso',
+    ]);
+
+    $this->get(route('prestamos.show', $prestamo))
+        ->assertOk()
+        ->assertSee('Han pasado 28 días desde la fecha esperada de devolución.');
 });
 
 it('conserva préstamos antiguos como activos mientras la migración de estado está pendiente', function () {

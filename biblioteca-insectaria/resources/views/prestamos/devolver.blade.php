@@ -31,7 +31,7 @@
                             </div>
                             @if($prestamo->fecha_devolucion_esperada->isPast())
                                 <div class="sm:col-span-2 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-                                    <strong>⚠ PRÉSTAMO FUERA DE PLAZO:</strong> Venció el {{ $prestamo->fecha_devolucion_esperada->format('d/m/Y') }} (hace {{ $prestamo->fecha_devolucion_esperada->diffInDays(now()) }} días).
+                                    <strong>⚠ PRÉSTAMO FUERA DE PLAZO:</strong> Venció el {{ $prestamo->fecha_devolucion_esperada->format('d/m/Y') }} (hace {{ $prestamo->fecha_devolucion_esperada->diffInDays(today()) }} días).
                                 </div>
                             @endif
                         </dl>

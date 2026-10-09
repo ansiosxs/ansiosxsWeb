@@ -203,13 +203,17 @@ class PrestamoController extends Controller
     public function verificarMorosidad()
     {
         $this->actualizarEstadosAtrasados();
+
+        return redirect()->route('morosidad.index')
+            ->with('success', 'Verificación de morosidad ejecutada correctamente.');
+    }
+
+    private function sincronizarEstadosMorosidad(): void
+    {
         Socio::whereHas('prestamosAtrasados')->update(['estado' => 'Moroso']);
         Socio::where('estado', 'Moroso')
             ->whereDoesntHave('prestamosAtrasados')
             ->update(['estado' => 'Activo']);
-
-        return redirect()->route('morosidad.index')
-            ->with('success', 'Verificación de morosidad ejecutada correctamente.');
     }
 
     public function recordatorios()
@@ -260,6 +264,8 @@ class PrestamoController extends Controller
         Prestamo::whereIn('estado', ['Prestado', 'En Cursada'])
             ->whereDate('fecha_devolucion_esperada', '<', now()->toDateString())
             ->update(['estado' => 'Atrasado']);
+
+        $this->sincronizarEstadosMorosidad();
     }
 
     private function sincronizarMorosidad(Socio $socio): void

@@ -86,7 +86,7 @@
                     @if($prestamo->estado === 'Atrasado')
                         <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
                             <strong>⚠ Préstamo fuera de plazo:</strong> Este préstamo venció el {{ $prestamo->fecha_devolucion_esperada->format('d/m/Y') }}.
-                            Han pasado {{ $prestamo->fecha_devolucion_esperada->diffInDays(now()) }} días desde la fecha esperada de devolución.
+                            Han pasado {{ $prestamo->fecha_devolucion_esperada->diffInDays(today()) }} días desde la fecha esperada de devolución.
                         </div>
                     @endif
 

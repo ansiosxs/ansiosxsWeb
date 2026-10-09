@@ -71,6 +71,17 @@ it('requiere el rut sin puntos y con guion al crear y valida su dígito verifica
     }
 });
 
+it('formatea el RUT con dígito verificador K usando guion', function () {
+    $socio = Socio::create([
+        'rut' => '20789754K',
+        'nombre' => 'Socio con dígito K',
+        'estado' => 'Activo',
+    ]);
+
+    expect($socio->rut)->toBe('20789754-K');
+    $this->assertDatabaseHas('socios', ['id' => $socio->id, 'rut' => '20789754-K']);
+});
+
 it('requires the rut format when editing a socio', function () {
     $this->actingAs(User::factory()->create());
     $socio = Socio::create([
